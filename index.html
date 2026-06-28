@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Young Grasshopper — AI Employee Orchestration</title>
+  <style>
+    /* ─── Reset & Base ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      background: #faf7f0;
+      color: #2d4a2d;
+      line-height: 1.7;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* ─── Container ─── */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── Header ─── */
+    header {
+      text-align: center;
+      padding: 60px 0 40px;
+    }
+    header .logo {
+      width: 160px;
+      margin: 0 auto 24px;
+    }
+    header h1 {
+      font-size: 2.2rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: #1a3a1a;
+      margin-bottom: 8px;
+    }
+    header p {
+      font-size: 1.1rem;
+      color: #4a6b4a;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      text-align: center;
+      padding: 60px 0;
+      border-top: 1px solid #d4cfc0;
+      border-bottom: 1px solid #d4cfc0;
+    }
+    .hero h2 {
+      font-size: 2rem;
+      color: #1a3a1a;
+      margin-bottom: 20px;
+      font-weight: 400;
+    }
+    .hero p {
+      font-size: 1.15rem;
+      max-width: 650px;
+      margin: 0 auto 30px;
+      color: #4a5a4a;
+    }
+    .hero .btn {
+      display: inline-block;
+      padding: 14px 40px;
+      background: #2d4a2d;
+      color: #faf7f0;
+      text-decoration: none;
+      font-size: 0.95rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .hero .btn:hover {
+      background: #1a3a1a;
+    }
+
+    /* ─── Sections ─── */
+    section {
+      padding: 60px 0;
+    }
+    section h3 {
+      font-size: 1.5rem;
+      color: #1a3a1a;
+      text-align: center;
+      margin-bottom: 40px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    /* ─── Cards ─── */
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+    .card {
+      background: #fffcf5;
+      border: 1px solid #d4cfc0;
+      padding: 40px 30px;
+      text-align: center;
+      transition: box-shadow 0.3s;
+    }
+    .card:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .card .icon {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+    .card h4 {
+      font-size: 1.2rem;
+      color: #1a3a1a;
+      margin-bottom: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .card p {
+      font-size: 0.95rem;
+      color: #4a5a4a;
+      margin-bottom: 20px;
+    }
+    .card .btn-outline {
+      display: inline-block;
+      padding: 10px 28px;
+      border: 1px solid #2d4a2d;
+      color: #2d4a2d;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all 0.3s;
+    }
+    .card .btn-outline:hover {
+      background: #2d4a2d;
+      color: #faf7f0;
+    }
+
+    @media (max-width: 700px) {
+      .cards { grid-template-columns: 1fr; }
+    }
+
+    /* ─── About ─── */
+    .about p {
+      max-width: 700px;
+      margin: 0 auto 20px;
+      font-size: 1.05rem;
+      color: #4a5a4a;
+      text-align: center;
+    }
+
+    /* ─── Contact ─── */
+    .contact {
+      text-align: center;
+      border-top: 1px solid #d4cfc0;
+      padding: 50px 0;
+    }
+    .contact h3 {
+      margin-bottom: 20px;
+    }
+    .contact p {
+      color: #4a5a4a;
+      margin-bottom: 6px;
+    }
+    .contact a {
+      color: #2d4a2d;
+      text-decoration: none;
+      border-bottom: 1px solid #d4cfc0;
+    }
+    .contact a:hover {
+      border-bottom-color: #2d4a2d;
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      text-align: center;
+      padding: 30px 0;
+      border-top: 1px solid #d4cfc0;
+      font-size: 0.85rem;
+      color: #6a7a6a;
+    }
+    footer span {
+      display: inline-block;
+      margin: 0 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ Header ═══ -->
+  <header>
+    <div class="container">
+      <img src="logo.png" alt="Young Grasshopper" class="logo">
+      <h1>Young Grasshopper</h1>
+      <p>AI Employee Orchestration</p>
+    </div>
+  </header>
+
+  <!-- ═══ Hero ═══ -->
+  <section class="hero">
+    <div class="container">
+      <h2>Your business, amplified by AI.</h2>
+      <p>
+        We design, deploy, and manage autonomous AI employees that work
+        alongside your team — handling research, reporting, scheduling,
+        content creation, and operations so you can focus on what matters.
+      </p>
+      <a href="#services" class="btn">Explore Our Work</a>
+    </div>
+  </section>
+
+  <!-- ═══ Services ═══ -->
+  <section id="services">
+    <div class="container">
+      <h3>Our Solutions</h3>
+      <div class="cards">
+        <div class="card">
+          <div class="icon">📋</div>
+          <h4>Home Care Brief</h4>
+          <p>
+            A weekly intelligence briefing for home care owners.
+            Curated market insights, regulatory updates, and actionable
+            strategies — delivered every Friday.
+          </p>
+          <a href="#" class="btn-outline">Learn More</a>
+        </div>
+        <div class="card">
+          <div class="icon">🤖</div>
+          <h4>AI Employee</h4>
+          <p>
+            Custom autonomous agents tailored to your business.
+            From customer support to market research — your AI team
+            works 24/7 so you don't have to.
+          </p>
+          <a href="#" class="btn-outline">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ About ═══ -->
+  <section class="about">
+    <div class="container">
+      <h3>Why Young Grasshopper</h3>
+      <p>
+        Every master was once a beginner. We believe in starting where you are
+        and building the tools you need to grow. Our AI employees are designed
+        to learn, adapt, and improve — just like a dedicated apprentice.
+      </p>
+      <p>
+        Founded by Ryan Sowell, Young Grasshopper LLC combines deep experience
+        in behavioral health with cutting-edge AI agent technology to deliver
+        practical automation that actually works.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ Contact ═══ -->
+  <section class="contact">
+    <div class="container">
+      <h3>Get in Touch</h3>
+      <p>Have a question or ready to get started?</p>
+      <p><a href="mailto:hello@younggrasshopper.io">hello@younggrasshopper.io</a></p>
+    </div>
+  </section>
+
+  <!-- ═══ Footer ═══ -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Young Grasshopper LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
