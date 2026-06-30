@@ -1,283 +1,774 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Young Grasshopper — AI Employee Orchestration</title>
-  <style>
-    /* ─── Reset & Base ─── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: Georgia, 'Times New Roman', Times, serif;
-      background: #faf7f0;
-      color: #2d4a2d;
-      line-height: 1.7;
-    }
-    img { max-width: 100%; height: auto; display: block; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Young Grasshopper — AI That Builds</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0f0a;
+            color: #e8ede8;
+            overflow-x: hidden;
+        }
 
-    /* ─── Container ─── */
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
+        /* ── Scrollbar ── */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0f0a; }
+        ::-webkit-scrollbar-thumb { background: #2d4a2d; border-radius: 3px; }
 
-    /* ─── Header ─── */
-    header {
-      text-align: center;
-      padding: 60px 0 40px;
-    }
-    header .logo {
-      width: 160px;
-      margin: 0 auto 24px;
-    }
-    header h1 {
-      font-size: 2.2rem;
-      letter-spacing: 6px;
-      text-transform: uppercase;
-      color: #1a3a1a;
-      margin-bottom: 8px;
-    }
-    header p {
-      font-size: 1.1rem;
-      color: #4a6b4a;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
+        /* ── Hero Section ── */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
 
-    /* ─── Hero ─── */
-    .hero {
-      text-align: center;
-      padding: 60px 0;
-      border-top: 1px solid #d4cfc0;
-      border-bottom: 1px solid #d4cfc0;
-    }
-    .hero h2 {
-      font-size: 2rem;
-      color: #1a3a1a;
-      margin-bottom: 20px;
-      font-weight: 400;
-    }
-    .hero p {
-      font-size: 1.15rem;
-      max-width: 650px;
-      margin: 0 auto 30px;
-      color: #4a5a4a;
-    }
-    .hero .btn {
-      display: inline-block;
-      padding: 14px 40px;
-      background: #2d4a2d;
-      color: #faf7f0;
-      text-decoration: none;
-      font-size: 0.95rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      border: none;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .hero .btn:hover {
-      background: #1a3a1a;
-    }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 30%;
+            z-index: 0;
+            filter: brightness(0.7) saturate(1.1);
+        }
 
-    /* ─── Sections ─── */
-    section {
-      padding: 60px 0;
-    }
-    section h3 {
-      font-size: 1.5rem;
-      color: #1a3a1a;
-      text-align: center;
-      margin-bottom: 40px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      font-weight: 400;
-    }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, 
+                rgba(10,15,10,0.3) 0%, 
+                rgba(10,15,10,0.1) 40%, 
+                rgba(10,15,10,0.6) 70%,
+                rgba(10,15,10,0.95) 100%);
+            z-index: 1;
+        }
 
-    /* ─── Cards ─── */
-    .cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-    }
-    .card {
-      background: #fffcf5;
-      border: 1px solid #d4cfc0;
-      padding: 40px 30px;
-      text-align: center;
-      transition: box-shadow 0.3s;
-    }
-    .card:hover {
-      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-    }
-    .card .icon {
-      font-size: 2.5rem;
-      margin-bottom: 16px;
-    }
-    .card h4 {
-      font-size: 1.2rem;
-      color: #1a3a1a;
-      margin-bottom: 12px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-    .card p {
-      font-size: 0.95rem;
-      color: #4a5a4a;
-      margin-bottom: 20px;
-    }
-    .card .btn-outline {
-      display: inline-block;
-      padding: 10px 28px;
-      border: 1px solid #2d4a2d;
-      color: #2d4a2d;
-      text-decoration: none;
-      font-size: 0.85rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      transition: all 0.3s;
-    }
-    .card .btn-outline:hover {
-      background: #2d4a2d;
-      color: #faf7f0;
-    }
+        /* ── Hero Content ── */
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            margin-top: 40px;
+        }
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 100;
+            background: linear-gradient(180deg, rgba(10,15,10,0.9) 0%, transparent 100%);
+            backdrop-filter: blur(10px);
+        }
+        .nav-logo {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 18px;
+            letter-spacing: 3px;
+            color: #d4af37;
+            text-transform: uppercase;
+        }
+        .nav-logo small { font-size: 11px; color: #8a9a8a; letter-spacing: 1px; display: block; }
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-links a {
+            color: #b0c0b0;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #d4af37;
+            transition: width 0.3s;
+        }
+        .nav-links a:hover { color: #d4af37; }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links .btn-cta {
+            padding: 10px 24px;
+            background: transparent;
+            border: 1px solid #d4af37;
+            border-radius: 6px;
+            color: #d4af37;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .nav-links .btn-cta:hover { background: #d4af37; color: #0a0f0a; }
+        .nav-links .btn-cta::after { display: none; }
 
-    @media (max-width: 700px) {
-      .cards { grid-template-columns: 1fr; }
-    }
+        /* ── Hero Content ── */
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            margin-top: -60px;
+        }
 
-    /* ─── About ─── */
-    .about p {
-      max-width: 700px;
-      margin: 0 auto 20px;
-      font-size: 1.05rem;
-      color: #4a5a4a;
-      text-align: center;
-    }
+        /* ── Floating Grasshopper ── */
+        .grasshopper-container {
+            position: relative;
+            width: 320px;
+            height: 380px;
+            margin-bottom: 10px;
+        }
 
-    /* ─── Contact ─── */
-    .contact {
-      text-align: center;
-      border-top: 1px solid #d4cfc0;
-      padding: 50px 0;
-    }
-    .contact h3 {
-      margin-bottom: 20px;
-    }
-    .contact p {
-      color: #4a5a4a;
-      margin-bottom: 6px;
-    }
-    .contact a {
-      color: #2d4a2d;
-      text-decoration: none;
-      border-bottom: 1px solid #d4cfc0;
-    }
-    .contact a:hover {
-      border-bottom-color: #2d4a2d;
-    }
+        .grasshopper-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            animation: float 6s ease-in-out infinite;
+            filter: drop-shadow(0 20px 60px rgba(93, 137, 93, 0.2));
+            position: relative;
+            z-index: 2;
+        }
 
-    /* ─── Footer ─── */
-    footer {
-      text-align: center;
-      padding: 30px 0;
-      border-top: 1px solid #d4cfc0;
-      font-size: 0.85rem;
-      color: #6a7a6a;
-    }
-    footer span {
-      display: inline-block;
-      margin: 0 12px;
-    }
-  </style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-15px) scale(1.02); }
+        }
+
+        /* ── Reflection ── */
+        .reflection {
+            position: absolute;
+            bottom: -20px;
+            left: 10%;
+            right: 10%;
+            height: 80px;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+        .reflection img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transform: scaleY(-1);
+            filter: blur(8px) brightness(0.5);
+            animation: reflectPulse 6s ease-in-out infinite;
+        }
+        @keyframes reflectPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* ── Pond ring effect ── */
+        .pond-ring {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 250px;
+            height: 30px;
+            background: radial-gradient(ellipse, rgba(93, 137, 93, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: ringPulse 6s ease-in-out infinite;
+        }
+        @keyframes ringPulse {
+            0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.5; }
+            50% { transform: translateX(-50%) scale(1.1); opacity: 1; }
+        }
+
+        /* ── Glow behind grasshopper ── */
+        .glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(93, 137, 93, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: glowPulse 4s ease-in-out infinite;
+        }
+        @keyframes glowPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+        }
+
+        /* ── Hero Title ── */
+        .hero-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 64px;
+            font-weight: 700;
+            color: #f0f5f0;
+            letter-spacing: 4px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            animation: fadeUp 1.2s ease 0.3s both;
+            text-shadow: 0 2px 30px rgba(0,0,0,0.5);
+        }
+        .hero-title .gold { color: #d4af37; }
+
+        .hero-subtitle {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: #d8e8d8;
+            font-style: italic;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            animation: fadeUp 1.2s ease 0.5s both;
+        }
+
+        .hero-tagline {
+            max-width: 600px;
+            font-size: 16px;
+            line-height: 1.7;
+            color: #d8e0d8;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+            animation: fadeUp 1.2s ease 0.7s both;
+        }
+        .hero-tagline strong { color: #b0c8b0; font-weight: 500; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── Monk silhouettes ── */
+        .monks {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .monk {
+            position: absolute;
+            bottom: 15%;
+            width: 40px;
+            height: 80px;
+            opacity: 0.08;
+            animation: monkMove 12s ease-in-out infinite;
+        }
+        .monk::before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at bottom, #5d895d, transparent);
+            border-radius: 50% 50% 30% 30%;
+        }
+        .monk:nth-child(1) { left: 8%; animation-delay: 0s; height: 70px; }
+        .monk:nth-child(2) { left: 18%; animation-delay: -3s; height: 90px; opacity: 0.05; }
+        .monk:nth-child(3) { right: 8%; animation-delay: -6s; height: 75px; }
+        .monk:nth-child(4) { right: 20%; animation-delay: -9s; height: 85px; opacity: 0.05; }
+
+        @keyframes monkMove {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            25% { transform: translateY(-10px) rotate(2deg); }
+            50% { transform: translateY(-5px) rotate(-1deg); }
+            75% { transform: translateY(-15px) rotate(1deg); }
+        }
+
+        /* ── Section Divider ── */
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            margin: 0 auto;
+        }
+        .divider.green { background: linear-gradient(90deg, transparent, #5d895d, transparent); }
+
+        /* ── Section ── */
+        section {
+            padding: 120px 48px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #e0c040;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: #f0f5f0;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .section-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #c8d8c8;
+            max-width: 700px;
+            font-weight: 300;
+        }
+
+        /* ── Philosophy Section ── */
+        .philosophy {
+            background: linear-gradient(180deg, #0a0f0a, #0d1a0d);
+        }
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        .philosophy-visual {
+            position: relative;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .philosophy-circle {
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(93, 137, 93, 0.15);
+            border-radius: 50%;
+            position: relative;
+            animation: spin 30s linear infinite;
+        }
+        .philosophy-circle::before {
+            content: '⚡';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+        }
+        .philosophy-circle::after {
+            content: '🦗';
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 20px;
+        }
+        .philosophy-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #d4af37;
+            border-radius: 50%;
+        }
+        .philosophy-dot:nth-child(1) { top: 50%; left: -4px; }
+        .philosophy-dot:nth-child(2) { top: 50%; right: -4px; }
+        .philosophy-dot:nth-child(3) { top: -4px; left: 50%; }
+        .philosophy-dot:nth-child(4) { bottom: -4px; left: 50%; }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ── Capabilities ── */
+        .capabilities {
+            background: #0d0f0d;
+        }
+        .cap-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .cap-card {
+            background: linear-gradient(135deg, rgba(93, 137, 93, 0.05), rgba(10, 15, 10, 0.8));
+            border: 1px solid rgba(93, 137, 93, 0.1);
+            border-radius: 16px;
+            padding: 36px 28px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .cap-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        .cap-card:hover::before { opacity: 1; }
+        .cap-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(212, 175, 55, 0.2);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .cap-icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+        .cap-card h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 20px;
+            color: #e8ede8;
+            margin-bottom: 10px;
+        }
+        .cap-card p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #b8d0b8;
+            font-weight: 300;
+        }
+
+        /* ── Mastery Section ── */
+        .mastery {
+            background: linear-gradient(180deg, #0d0f0d, #0a0f0a);
+        }
+        .mastery-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .mastery-list {
+            list-style: none;
+        }
+        .mastery-list li {
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(93, 137, 93, 0.08);
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        .mastery-list li:last-child { border: none; }
+        .mastery-list .num {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 32px;
+            color: rgba(212, 175, 55, 0.15);
+            font-weight: 700;
+            line-height: 1;
+            min-width: 40px;
+        }
+        .mastery-list .text strong {
+            display: block;
+            font-size: 16px;
+            color: #d0d8d0;
+            margin-bottom: 4px;
+        }
+        .mastery-list .text span {
+                    font-size: 13px;
+                    color: #8aaa8a;
+                    line-height: 1.5;
+                }
+
+                .cta-section p {
+                    font-size: 16px;
+                    color: #b0c8b0;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .symbol {
+            width: 100px;
+            height: 100px;
+            border: 1px solid rgba(93, 137, 93, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            animation: symFloat 6s ease-in-out infinite;
+        }
+        .symbol:nth-child(2) { animation-delay: -2s; }
+        .symbol:nth-child(3) { animation-delay: -4s; }
+        @keyframes symFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* ── CTA Section ── */
+        .cta-section {
+            text-align: center;
+            padding: 140px 48px;
+            background: linear-gradient(180deg, #0a0f0a, #0d1a0d);
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at center, rgba(93, 137, 93, 0.03) 0%, transparent 50%);
+            animation: bgSpin 20s linear infinite;
+        }
+        @keyframes bgSpin { to { transform: rotate(360deg); } }
+
+        .cta-section h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: #e8ede8;
+            margin-bottom: 16px;
+            position: relative;
+        }
+        .cta-section p {
+            font-size: 16px;
+            color: #8a9a8a;
+            max-width: 500px;
+            margin: 0 auto 32px;
+            line-height: 1.7;
+            position: relative;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 16px 48px;
+            background: linear-gradient(135deg, #d4af37, #b8962e);
+            color: #0a0f0a;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(212, 175, 55, 0.2);
+        }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid rgba(93, 137, 93, 0.05);
+        }
+        footer p {
+            font-size: 12px;
+            color: #4a5a4a;
+            letter-spacing: 1px;
+        }
+
+        /* ── Scroll reveal ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .nav { padding: 16px 20px; }
+            .nav-links a:not(.btn-cta) { display: none; }
+            .hero-title { font-size: 32px; }
+            .hero-subtitle { font-size: 18px; }
+            .grasshopper-container { width: 200px; height: 250px; }
+            section { padding: 60px 20px; }
+            .philosophy-grid, .mastery-content { grid-template-columns: 1fr; gap: 40px; }
+            .cap-grid { grid-template-columns: 1fr; }
+            .section-title { font-size: 28px; }
+            .cta-section h2 { font-size: 32px; }
+            .nav-links .btn-cta { padding: 8px 16px; font-size: 12px; }
+        }
+
+        /* ── Lotus decoration ── */
+        .lotus {
+            position: absolute;
+            font-size: 14px;
+            opacity: 0.06;
+            pointer-events: none;
+        }
+        .lotus:nth-child(1) { bottom: 20%; left: 5%; font-size: 20px; animation: float 7s ease-in-out infinite; }
+        .lotus:nth-child(2) { bottom: 30%; right: 8%; font-size: 16px; animation: float 9s ease-in-out infinite -3s; }
+    </style>
 </head>
 <body>
-
-  <!-- ═══ Header ═══ -->
-  <header>
-    <div class="container">
-      <img src="logo.png" alt="Young Grasshopper" class="logo">
-      <h1>Young Grasshopper</h1>
-      <p>AI Employee Orchestration</p>
-    </div>
-  </header>
-
-  <!-- ═══ Hero ═══ -->
-  <section class="hero">
-    <div class="container">
-      <h2>Your business, amplified by AI.</h2>
-      <p>
-        We design, deploy, and manage autonomous AI employees that work
-        alongside your team — handling research, reporting, scheduling,
-        content creation, and operations so you can focus on what matters.
-      </p>
-      <a href="#services" class="btn">Explore Our Work</a>
-    </div>
-  </section>
-
-  <!-- ═══ Services ═══ -->
-  <section id="services">
-    <div class="container">
-      <h3>Our Solutions</h3>
-      <div class="cards">
-        <div class="card">
-          <div class="icon">📋</div>
-          <h4>Home Care Brief</h4>
-          <p>
-            A weekly intelligence briefing for home care owners.
-            Curated market insights, regulatory updates, and actionable
-            strategies — delivered every Friday.
-          </p>
-          <a href="#" class="btn-outline">Learn More</a>
+    <!-- ═══ Navigation ═══ -->
+    <nav class="nav">
+        <div class="nav-logo">
+            Young Grasshopper
+            <small>AI Employee Orchestration</small>
         </div>
-        <div class="card">
-          <div class="icon">🤖</div>
-          <h4>AI Employee</h4>
-          <p>
-            Custom autonomous agents tailored to your business.
-            From customer support to market research — your AI team
-            works 24/7 so you don't have to.
-          </p>
-          <a href="#" class="btn-outline">Learn More</a>
+        <div class="nav-links">
+            <a href="#philosophy">Philosophy</a>
+            <a href="#capabilities">Capabilities</a>
+            <a href="#mastery">Mastery</a>
+            <a href="#contact" class="btn-cta">Begin Journey</a>
         </div>
-      </div>
-    </div>
-  </section>
+    </nav>
 
-  <!-- ═══ About ═══ -->
-  <section class="about">
-    <div class="container">
-      <h3>Why Young Grasshopper</h3>
-      <p>
-        Every master was once a beginner. We believe in starting where you are
-        and building the tools you need to grow. Our AI employees are designed
-        to learn, adapt, and improve — just like a dedicated apprentice.
-      </p>
-      <p>
-        Founded by Ryan Sowell, Young Grasshopper LLC combines deep experience
-        in behavioral health with cutting-edge AI agent technology to deliver
-        practical automation that actually works.
-      </p>
-    </div>
-  </section>
+    <!-- ═══ Hero ═══ -->
+    <section class="hero">
+        <img src="hero-scene.png?v=2" alt="" class="hero-bg">
+        <div class="hero-overlay"></div>
 
-  <!-- ═══ Contact ═══ -->
-  <section class="contact">
-    <div class="container">
-      <h3>Get in Touch</h3>
-      <p>Have a question or ready to get started?</p>
-      <p><a href="mailto:hello@younggrasshopper.io">hello@younggrasshopper.io</a></p>
-    </div>
-  </section>
+        <div class="hero-content">
+            <h1 class="hero-title">AI That <span class="gold">Builds</span></h1>
+            <p class="hero-subtitle">— Mastery Through Discipline —</p>
+            <p class="hero-tagline">
+                We don't just deploy AI. We forge <strong>AI Employees</strong> — autonomous agents 
+                trained in your workflows, disciplined in your processes, and 
+                <strong>loyal to your business</strong>. Like a master and student, 
+                we teach until the student surpasses the teacher.
+            </p>
+        </div>
+    </section>
 
-  <!-- ═══ Footer ═══ -->
-  <footer>
-    <div class="container">
-      <p>&copy; 2026 Young Grasshopper LLC. All rights reserved.</p>
-    </div>
-  </footer>
+    <!-- ═══ Philosophy ═══ -->
+    <section class="philosophy" id="philosophy">
+        <div class="philosophy-grid">
+            <div class="philosophy-visual">
+                <img src="section-hands.png" alt="" style="width:100%; max-width:450px; border-radius:16px; border:1px solid rgba(93,137,93,0.15); box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+            </div>
+            <div>
+                <div class="section-label">The Way of the Grasshopper</div>
+                <h2 class="section-title">Technology in Service of <br>Human Potential</h2>
+                <p class="section-text">
+                    The young grasshopper learns by watching, by doing, by failing and rising again. 
+                    So too does our AI — not as a cold tool, but as a <strong>disciplined practitioner</strong> 
+                    of your business. We build AI that doesn't replace people, 
+                    but <strong>elevates them</strong> to focus on what matters.
+                </p>
+                <p class="section-text" style="margin-top:16px;">
+                    Every deployment is a <strong>partnership</strong>. We train your AI Employee 
+                    in the specifics of your practice — your patients, your workflows, your standards — 
+                    until it operates with the precision of a master.
+                </p>
+            </div>
+        </div>
+    </section>
 
+    <!-- ═══ Capabilities ═══ -->
+    <section class="capabilities" id="capabilities">
+        <div class="section-label" style="text-align:center;">What We Forge</div>
+        <h2 class="section-title" style="text-align:center;">Capabilities That <span class="gold">Serve</span></h2>
+        <div class="cap-grid">
+            <div class="cap-card">
+                <div class="cap-icon">🧘</div>
+                <h3>Patient Reception</h3>
+                <p>24/7 phone and text answering. Schedule appointments, answer questions, send reminders — all with the warmth of a real front desk.</p>
+            </div>
+            <div class="cap-card">
+                <div class="cap-icon">⚡</div>
+                <h3>Billing & Claims</h3>
+                <p>Process insurance claims, follow up on outstanding balances, and generate billing reports. Your revenue cycle, automated.</p>
+            </div>
+            <div class="cap-card">
+                <div class="cap-icon">📋</div>
+                <h3>Patient Outreach</h3>
+                <p>Recall campaigns, reactivation sequences, review requests. Never let a patient slip through the cracks again.</p>
+            </div>
+            <div class="cap-card">
+                <div class="cap-icon">📊</div>
+                <h3>Intelligence Briefings</h3>
+                <p>Weekly market intelligence, regulatory updates, and actionable insights tailored to your industry — delivered before your Monday meeting.</p>
+            </div>
+            <div class="cap-card">
+                <div class="cap-icon">🔐</div>
+                <h3>Local & Secure</h3>
+                <p>Deploy on your own hardware or our cloud. HIPAA-ready architecture. Your data never leaves your control.</p>
+            </div>
+            <div class="cap-card">
+                <div class="cap-icon">🦗</div>
+                <h3>Continuous Learning</h3>
+                <p>Your AI Employee grows with you. Every interaction makes it smarter. Every workflow we build adds to its mastery.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ Mastery ═══ -->
+    <section class="mastery" id="mastery">
+        <div class="section-label" style="text-align:center;">Years of Discipline</div>
+        <h2 class="section-title" style="text-align:center;">The Path to <span class="gold">Mastery</span></h2>
+        <div class="mastery-content" style="margin-top:48px;">
+            <div>
+                <ul class="mastery-list">
+                    <li>
+                        <div class="num">01</div>
+                        <div class="text">
+                            <strong>Observe & Understand</strong>
+                            <span>We study your workflows, your patients, your pain points. Every business is a unique dojo.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="num">02</div>
+                        <div class="text">
+                            <strong>Build With Precision</strong>
+                            <span>We forge your AI Employee — an autonomous agent trained specifically for your practice. Not a chatbot. An employee.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="num">03</div>
+                        <div class="text">
+                            <strong>Train & Refine</strong>
+                            <span>We run, test, and refine until the AI operates at master level. Then we keep improving.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="num">04</div>
+                        <div class="text">
+                            <strong>The Student Surpasses</strong>
+                            <span>Your AI Employee handles the volume. Your human team handles the heart. Together, you achieve what neither could alone.</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="symbol-area">
+                <div class="symbol">⚡</div>
+                <div class="symbol">🦗</div>
+                <div class="symbol">🧘</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ CTA ═══ -->
+    <section class="cta-section" id="contact">
+        <h2>Ready to Begin<br>Your Journey?</h2>
+        <p>Every master was once a student. Every great AI Employee started with a conversation. Let's begin yours.</p>
+        <a href="mailto:hello@younggrasshopper.io" class="cta-button">Start Your Path</a>
+    </section>
+
+    <!-- ═══ Footer ═══ -->
+    <footer>
+        <p>YOUNG GRASSHOPPER LLC · Danville, Iowa · AI Employee Orchestration</p>
+    </footer>
+
+    <!-- ═══ Scroll Reveal ═══ -->
+    <script>
+        // Reveal all sections immediately
+        document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
 </body>
 </html>
