@@ -1,774 +1,729 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Young Grasshopper — AI That Builds</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #0a0f0a;
-            color: #e8ede8;
-            overflow-x: hidden;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Young Grasshopper — AI That Builds</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* ═══ HOME PAGE SPECIFIC STYLES ═══ */
 
-        /* ── Scrollbar ── */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #0a0f0a; }
-        ::-webkit-scrollbar-thumb { background: #2d4a2d; border-radius: 3px; }
+    /* ── Hero Background ── */
+    .hero-bg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      z-index: 0;
+      filter: brightness(0.65) saturate(1.05);
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg,
+        rgba(8,12,8,0.3) 0%,
+        rgba(8,12,8,0.1) 40%,
+        rgba(8,12,8,0.6) 70%,
+        rgba(8,12,8,0.95) 100%);
+      z-index: 1;
+    }
 
-        /* ── Hero Section ── */
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 24px;
+      margin-top: -40px;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 72px;
+      font-weight: 700;
+      color: #f0f5f0;
+      letter-spacing: 5px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      animation: fadeUp 1.2s ease 0.3s both;
+      text-shadow: 0 2px 40px rgba(0,0,0,0.5);
+    }
+    .hero-subtitle {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 26px;
+      font-weight: 400;
+      color: #d8e8d8;
+      font-style: italic;
+      letter-spacing: 3px;
+      margin-bottom: 32px;
+      animation: fadeUp 1.2s ease 0.5s both;
+    }
+    .hero-tagline {
+      max-width: 620px;
+      font-size: 17px;
+      line-height: 1.8;
+      color: #c8d8c8;
+      font-weight: 300;
+      letter-spacing: 0.3px;
+      animation: fadeUp 1.2s ease 0.7s both;
+    }
+    .hero-tagline strong { color: #b0c8b0; font-weight: 500; }
 
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center 30%;
-            z-index: 0;
-            filter: brightness(0.7) saturate(1.1);
-        }
+    /* ── Floating Grasshopper ── */
+    .grasshopper-container {
+      position: relative;
+      width: 340px;
+      height: 400px;
+      margin-bottom: 10px;
+    }
+    .grasshopper-image {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      animation: float 6s ease-in-out infinite;
+      filter: drop-shadow(0 20px 60px rgba(93, 137, 93, 0.2));
+      position: relative;
+      z-index: 2;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-15px) scale(1.02); }
+    }
+    .glow-bg {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(93, 137, 93, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: glowPulse 4s ease-in-out infinite;
+    }
+    @keyframes glowPulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+      50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+    }
 
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, 
-                rgba(10,15,10,0.3) 0%, 
-                rgba(10,15,10,0.1) 40%, 
-                rgba(10,15,10,0.6) 70%,
-                rgba(10,15,10,0.95) 100%);
-            z-index: 1;
-        }
+    /* ── Hero CTAs ── */
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+      animation: fadeUp 1.2s ease 0.9s both;
+    }
 
-        /* ── Hero Content ── */
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-            margin-top: 40px;
-        }
-        .nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 20px 48px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 100;
-            background: linear-gradient(180deg, rgba(10,15,10,0.9) 0%, transparent 100%);
-            backdrop-filter: blur(10px);
-        }
-        .nav-logo {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 18px;
-            letter-spacing: 3px;
-            color: #d4af37;
-            text-transform: uppercase;
-        }
-        .nav-logo small { font-size: 11px; color: #8a9a8a; letter-spacing: 1px; display: block; }
-        .nav-links { display: flex; gap: 32px; align-items: center; }
-        .nav-links a {
-            color: #b0c0b0;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 400;
-            letter-spacing: 0.5px;
-            transition: color 0.3s;
-            position: relative;
-        }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: #d4af37;
-            transition: width 0.3s;
-        }
-        .nav-links a:hover { color: #d4af37; }
-        .nav-links a:hover::after { width: 100%; }
-        .nav-links .btn-cta {
-            padding: 10px 24px;
-            background: transparent;
-            border: 1px solid #d4af37;
-            border-radius: 6px;
-            color: #d4af37;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-        .nav-links .btn-cta:hover { background: #d4af37; color: #0a0f0a; }
-        .nav-links .btn-cta::after { display: none; }
+    /* ═══ SLIDESHOW ═══ */
+    .slideshow-section {
+      max-width: none;
+      padding: 80px 0;
+      background: var(--bg-primary);
+      overflow: hidden;
+    }
+    .slideshow-track {
+      display: flex;
+      gap: 0;
+      animation: scrollSlides 45s linear infinite;
+      width: fit-content;
+    }
+    .slideshow-track:hover { animation-play-state: paused; }
+    @keyframes scrollSlides {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .slide {
+      min-width: 380px;
+      height: 400px;
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin: 0 12px;
+      flex-shrink: 0;
+    }
+    .slide img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .slide:hover img { transform: scale(1.05); }
+    .slide-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(8,12,8,0.85) 100%);
+    }
+    .slide-content {
+      position: absolute;
+      bottom: 0;
+      left: 0; right: 0;
+      padding: 32px 28px 24px;
+    }
+    .slide-content .pill { margin-bottom: 8px; }
+    .slide-content h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 22px;
+      color: #f0f5f0;
+      margin-bottom: 4px;
+    }
+    .slide-content .saying {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 17px;
+      font-style: italic;
+      color: var(--text-muted);
+    }
 
-        /* ── Hero Content ── */
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-            margin-top: -60px;
-        }
+    /* ═══ ABOUT / PHILOSOPHY ═══ */
+    .about-section {
+      background: linear-gradient(180deg, var(--bg-primary), #0d1a0d);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-visual {
+      position: relative;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .about-circle {
+      width: 300px; height: 300px;
+      border: 1px solid rgba(93, 137, 93, 0.12);
+      border-radius: 50%;
+      position: relative;
+      animation: spin 30s linear infinite;
+    }
+    .about-circle .dot {
+      position: absolute;
+      width: 8px; height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+    .about-circle .dot:nth-child(1) { top: 50%; left: -4px; }
+    .about-circle .dot:nth-child(2) { top: 50%; right: -4px; }
+    .about-circle .dot:nth-child(3) { top: -4px; left: 50%; }
+    .about-circle .dot:nth-child(4) { bottom: -4px; left: 50%; }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* ── Floating Grasshopper ── */
-        .grasshopper-container {
-            position: relative;
-            width: 320px;
-            height: 380px;
-            margin-bottom: 10px;
-        }
+    .about-symbols {
+      display: flex;
+      gap: 20px;
+      margin-top: 40px;
+      justify-content: center;
+    }
+    .about-symbol {
+      width: 80px; height: 80px;
+      border: 1px solid rgba(93, 137, 93, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      animation: float 6s ease-in-out infinite;
+    }
+    .about-symbol:nth-child(2) { animation-delay: -2s; }
+    .about-symbol:nth-child(3) { animation-delay: -4s; }
 
-        .grasshopper-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            animation: float 6s ease-in-out infinite;
-            filter: drop-shadow(0 20px 60px rgba(93, 137, 93, 0.2));
-            position: relative;
-            z-index: 2;
-        }
+    /* ═══ CAPABILITIES TEASER ═══ */
+    .capabilities-teaser {
+      background: #0d0f0d;
+    }
+    .cap-teaser-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-15px) scale(1.02); }
-        }
+    /* ── Expandable Capabilities ── */
+    .expandable-card {
+      max-width: 900px;
+      margin: 0 auto;
+      background: linear-gradient(145deg, #111a11, #0d150d);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .expandable-card:hover {
+      border-color: rgba(212, 175, 55, 0.2);
+    }
+    .expandable-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 32px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .expandable-header h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 22px;
+      color: var(--text-primary);
+    }
+    .expandable-header .expand-icon {
+      font-size: 20px;
+      color: var(--gold);
+      transition: transform 0.3s ease;
+    }
+    .expandable-card.expanded .expand-icon {
+      transform: rotate(45deg);
+    }
+    .expandable-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, padding 0.5s ease;
+      padding: 0 32px;
+    }
+    .expandable-card.expanded .expandable-body {
+      max-height: 4000px;
+      padding: 0 32px 32px;
+    }
+    .caps-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .cap-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .cap-item:hover {
+      background: rgba(109, 163, 109, 0.05);
+      color: var(--text-primary);
+    }
+    .cap-item .bullet {
+      width: 5px; height: 5px;
+      background: var(--gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .expandable-footer {
+      text-align: center;
+      padding: 20px 32px 32px;
+      display: none;
+    }
+    .expandable-card.expanded .expandable-footer {
+      display: block;
+    }
 
-        /* ── Reflection ── */
-        .reflection {
-            position: absolute;
-            bottom: -20px;
-            left: 10%;
-            right: 10%;
-            height: 80px;
-            opacity: 0.15;
-            pointer-events: none;
-        }
-        .reflection img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            transform: scaleY(-1);
-            filter: blur(8px) brightness(0.5);
-            animation: reflectPulse 6s ease-in-out infinite;
-        }
-        @keyframes reflectPulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
+    /* ═══ HOW IT WORKS ═══ */
+    .how-section {
+      background: var(--bg-secondary);
+    }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .step-card {
+      text-align: center;
+      padding: 36px 24px;
+    }
+    .step-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: rgba(212, 175, 55, 0.1);
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+    .step-card h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .step-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-weight: 300;
+    }
 
-        /* ── Pond ring effect ── */
-        .pond-ring {
-            position: absolute;
-            bottom: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 250px;
-            height: 30px;
-            background: radial-gradient(ellipse, rgba(93, 137, 93, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: ringPulse 6s ease-in-out infinite;
-        }
-        @keyframes ringPulse {
-            0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.5; }
-            50% { transform: translateX(-50%) scale(1.1); opacity: 1; }
-        }
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 768px) {
+      .hero-title { font-size: 36px; letter-spacing: 3px; }
+      .hero-subtitle { font-size: 18px; }
+      .grasshopper-container { width: 200px; height: 250px; }
+      .hero-tagline { font-size: 15px; }
+      .hero-ctas { flex-direction: column; align-items: center; }
 
-        /* ── Glow behind grasshopper ── */
-        .glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(93, 137, 93, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: glowPulse 4s ease-in-out infinite;
-        }
-        @keyframes glowPulse {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
-        }
+      .slide { min-width: 260px; height: 300px; }
+      .slide-content h3 { font-size: 18px; }
 
-        /* ── Hero Title ── */
-        .hero-title {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 64px;
-            font-weight: 700;
-            color: #f0f5f0;
-            letter-spacing: 4px;
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            animation: fadeUp 1.2s ease 0.3s both;
-            text-shadow: 0 2px 30px rgba(0,0,0,0.5);
-        }
-        .hero-title .gold { color: #d4af37; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .steps-grid { grid-template-columns: 1fr; }
 
-        .hero-subtitle {
-            font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: 24px;
-            font-weight: 400;
-            color: #d8e8d8;
-            font-style: italic;
-            letter-spacing: 2px;
-            margin-bottom: 40px;
-            animation: fadeUp 1.2s ease 0.5s both;
-        }
+      .caps-grid { grid-template-columns: 1fr; }
+      .expandable-header { padding: 20px 24px; }
+      .expandable-header h3 { font-size: 18px; }
+      .expandable-body { padding: 0 24px; }
+      .expandable-card.expanded .expandable-body { padding: 0 24px 24px; }
+    }
 
-        .hero-tagline {
-            max-width: 600px;
-            font-size: 16px;
-            line-height: 1.7;
-            color: #d8e0d8;
-            font-weight: 300;
-            letter-spacing: 0.3px;
-            animation: fadeUp 1.2s ease 0.7s both;
-        }
-        .hero-tagline strong { color: #b0c8b0; font-weight: 500; }
+    @media (max-width: 480px) {
+      .slide { min-width: 220px; height: 250px; }
+    }
 
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ── Monk silhouettes ── */
-        .monks {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-        .monk {
-            position: absolute;
-            bottom: 15%;
-            width: 40px;
-            height: 80px;
-            opacity: 0.08;
-            animation: monkMove 12s ease-in-out infinite;
-        }
-        .monk::before {
-            content: '';
-            display: block;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(ellipse at bottom, #5d895d, transparent);
-            border-radius: 50% 50% 30% 30%;
-        }
-        .monk:nth-child(1) { left: 8%; animation-delay: 0s; height: 70px; }
-        .monk:nth-child(2) { left: 18%; animation-delay: -3s; height: 90px; opacity: 0.05; }
-        .monk:nth-child(3) { right: 8%; animation-delay: -6s; height: 75px; }
-        .monk:nth-child(4) { right: 20%; animation-delay: -9s; height: 85px; opacity: 0.05; }
-
-        @keyframes monkMove {
-            0%, 100% { transform: translateY(0) rotate(-2deg); }
-            25% { transform: translateY(-10px) rotate(2deg); }
-            50% { transform: translateY(-5px) rotate(-1deg); }
-            75% { transform: translateY(-15px) rotate(1deg); }
-        }
-
-        /* ── Section Divider ── */
-        .divider {
-            width: 60px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #d4af37, transparent);
-            margin: 0 auto;
-        }
-        .divider.green { background: linear-gradient(90deg, transparent, #5d895d, transparent); }
-
-        /* ── Section ── */
-        section {
-            padding: 120px 48px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #e0c040;
-            margin-bottom: 16px;
-            font-weight: 500;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 42px;
-            font-weight: 700;
-            color: #f0f5f0;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-
-        .section-text {
-            font-size: 16px;
-            line-height: 1.8;
-            color: #c8d8c8;
-            max-width: 700px;
-            font-weight: 300;
-        }
-
-        /* ── Philosophy Section ── */
-        .philosophy {
-            background: linear-gradient(180deg, #0a0f0a, #0d1a0d);
-        }
-        .philosophy-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-        .philosophy-visual {
-            position: relative;
-            height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .philosophy-circle {
-            width: 300px;
-            height: 300px;
-            border: 1px solid rgba(93, 137, 93, 0.15);
-            border-radius: 50%;
-            position: relative;
-            animation: spin 30s linear infinite;
-        }
-        .philosophy-circle::before {
-            content: '⚡';
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 24px;
-        }
-        .philosophy-circle::after {
-            content: '🦗';
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            font-size: 20px;
-        }
-        .philosophy-dot {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: #d4af37;
-            border-radius: 50%;
-        }
-        .philosophy-dot:nth-child(1) { top: 50%; left: -4px; }
-        .philosophy-dot:nth-child(2) { top: 50%; right: -4px; }
-        .philosophy-dot:nth-child(3) { top: -4px; left: 50%; }
-        .philosophy-dot:nth-child(4) { bottom: -4px; left: 50%; }
-
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* ── Capabilities ── */
-        .capabilities {
-            background: #0d0f0d;
-        }
-        .cap-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin-top: 48px;
-        }
-        .cap-card {
-            background: linear-gradient(135deg, rgba(93, 137, 93, 0.05), rgba(10, 15, 10, 0.8));
-            border: 1px solid rgba(93, 137, 93, 0.1);
-            border-radius: 16px;
-            padding: 36px 28px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .cap-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #d4af37, transparent);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-        .cap-card:hover::before { opacity: 1; }
-        .cap-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(212, 175, 55, 0.2);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-        .cap-icon {
-            font-size: 36px;
-            margin-bottom: 16px;
-        }
-        .cap-card h3 {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 20px;
-            color: #e8ede8;
-            margin-bottom: 10px;
-        }
-        .cap-card p {
-            font-size: 14px;
-            line-height: 1.7;
-            color: #b8d0b8;
-            font-weight: 300;
-        }
-
-        /* ── Mastery Section ── */
-        .mastery {
-            background: linear-gradient(180deg, #0d0f0d, #0a0f0a);
-        }
-        .mastery-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-        .mastery-list {
-            list-style: none;
-        }
-        .mastery-list li {
-            padding: 16px 0;
-            border-bottom: 1px solid rgba(93, 137, 93, 0.08);
-            display: flex;
-            gap: 16px;
-            align-items: flex-start;
-        }
-        .mastery-list li:last-child { border: none; }
-        .mastery-list .num {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 32px;
-            color: rgba(212, 175, 55, 0.15);
-            font-weight: 700;
-            line-height: 1;
-            min-width: 40px;
-        }
-        .mastery-list .text strong {
-            display: block;
-            font-size: 16px;
-            color: #d0d8d0;
-            margin-bottom: 4px;
-        }
-        .mastery-list .text span {
-                    font-size: 13px;
-                    color: #8aaa8a;
-                    line-height: 1.5;
-                }
-
-                .cta-section p {
-                    font-size: 16px;
-                    color: #b0c8b0;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-        .symbol {
-            width: 100px;
-            height: 100px;
-            border: 1px solid rgba(93, 137, 93, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            animation: symFloat 6s ease-in-out infinite;
-        }
-        .symbol:nth-child(2) { animation-delay: -2s; }
-        .symbol:nth-child(3) { animation-delay: -4s; }
-        @keyframes symFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        /* ── CTA Section ── */
-        .cta-section {
-            text-align: center;
-            padding: 140px 48px;
-            background: linear-gradient(180deg, #0a0f0a, #0d1a0d);
-            position: relative;
-            overflow: hidden;
-        }
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(ellipse at center, rgba(93, 137, 93, 0.03) 0%, transparent 50%);
-            animation: bgSpin 20s linear infinite;
-        }
-        @keyframes bgSpin { to { transform: rotate(360deg); } }
-
-        .cta-section h2 {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 48px;
-            font-weight: 700;
-            color: #e8ede8;
-            margin-bottom: 16px;
-            position: relative;
-        }
-        .cta-section p {
-            font-size: 16px;
-            color: #8a9a8a;
-            max-width: 500px;
-            margin: 0 auto 32px;
-            line-height: 1.7;
-            position: relative;
-        }
-        .cta-button {
-            display: inline-block;
-            padding: 16px 48px;
-            background: linear-gradient(135deg, #d4af37, #b8962e);
-            color: #0a0f0a;
-            font-size: 14px;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 8px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            transition: all 0.3s;
-            position: relative;
-        }
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 40px rgba(212, 175, 55, 0.2);
-        }
-
-        /* ── Footer ── */
-        footer {
-            text-align: center;
-            padding: 40px;
-            border-top: 1px solid rgba(93, 137, 93, 0.05);
-        }
-        footer p {
-            font-size: 12px;
-            color: #4a5a4a;
-            letter-spacing: 1px;
-        }
-
-        /* ── Scroll reveal ── */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s ease;
-        }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-
-        /* ── Responsive ── */
-        @media (max-width: 768px) {
-            .nav { padding: 16px 20px; }
-            .nav-links a:not(.btn-cta) { display: none; }
-            .hero-title { font-size: 32px; }
-            .hero-subtitle { font-size: 18px; }
-            .grasshopper-container { width: 200px; height: 250px; }
-            section { padding: 60px 20px; }
-            .philosophy-grid, .mastery-content { grid-template-columns: 1fr; gap: 40px; }
-            .cap-grid { grid-template-columns: 1fr; }
-            .section-title { font-size: 28px; }
-            .cta-section h2 { font-size: 32px; }
-            .nav-links .btn-cta { padding: 8px 16px; font-size: 12px; }
-        }
-
-        /* ── Lotus decoration ── */
-        .lotus {
-            position: absolute;
-            font-size: 14px;
-            opacity: 0.06;
-            pointer-events: none;
-        }
-        .lotus:nth-child(1) { bottom: 20%; left: 5%; font-size: 20px; animation: float 7s ease-in-out infinite; }
-        .lotus:nth-child(2) { bottom: 30%; right: 8%; font-size: 16px; animation: float 9s ease-in-out infinite -3s; }
-    </style>
+    /* ── Monk silhouettes (ambient) ── */
+    .monks {
+      position: absolute; inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .monk {
+      position: absolute;
+      bottom: 15%;
+      width: 40px; height: 80px;
+      opacity: 0.06;
+      animation: monkMove 12s ease-in-out infinite;
+    }
+    .monk::before {
+      content: '';
+      display: block;
+      width: 100%; height: 100%;
+      background: radial-gradient(ellipse at bottom, #5d895d, transparent);
+      border-radius: 50% 50% 30% 30%;
+    }
+    .monk:nth-child(1) { left: 8%; animation-delay: 0s; height: 70px; }
+    .monk:nth-child(2) { left: 18%; animation-delay: -3s; height: 90px; opacity: 0.04; }
+    .monk:nth-child(3) { right: 8%; animation-delay: -6s; height: 75px; }
+    .monk:nth-child(4) { right: 20%; animation-delay: -9s; height: 85px; opacity: 0.04; }
+    @keyframes monkMove {
+      0%, 100% { transform: translateY(0) rotate(-2deg); }
+      25% { transform: translateY(-10px) rotate(2deg); }
+      50% { transform: translateY(-5px) rotate(-1deg); }
+      75% { transform: translateY(-15px) rotate(1deg); }
+    }
+  </style>
 </head>
 <body>
-    <!-- ═══ Navigation ═══ -->
-    <nav class="nav">
-        <div class="nav-logo">
-            Young Grasshopper
-            <small>AI Employee Orchestration</small>
+  <!-- ═══ Navigation ═══ -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      Young Grasshopper
+      <small>AI Employee Orchestration</small>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="for-farmers.html">For Farmers</a>
+      <a href="for-individuals.html">For Individuals</a>
+      <a href="capabilities.html">Capabilities</a>
+      <a href="contact.html" class="btn-nav">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- ═══ Hero ═══ -->
+  <section class="hero-section">
+    <img src="hero-scene.png?v=2" alt="" class="hero-bg">
+    <div class="hero-overlay"></div>
+    <div class="monks">
+      <div class="monk"></div>
+      <div class="monk"></div>
+      <div class="monk"></div>
+      <div class="monk"></div>
+    </div>
+    <div class="hero-content">
+      <h1 class="hero-title">AI That <span class="gold">Builds</span></h1>
+      <p class="hero-subtitle">— Mastery Through Discipline —</p>
+      <p class="hero-tagline">
+        We forge <strong>AI Employees</strong> — autonomous agents trained in your workflows, 
+        disciplined in your processes. Like master and student, we teach until the 
+        student surpasses the teacher. Your business, amplified.
+      </p>
+      <div class="hero-ctas">
+        <a href="capabilities.html" class="btn-outline">Explore Capabilities</a>
+        <a href="contact.html" class="btn-primary">Start Your Journey</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Slideshow ═══ -->
+  <section class="slideshow-section">
+    <div class="slideshow-track">
+      <!-- Duplicate set for seamless loop -->
+      <div class="slide">
+        <img src="slideshow-master.jpg" alt="The Master">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <span class="pill">The Philosophy</span>
+          <h3>The Master Within</h3>
+          <p class="saying">"The student becomes the teacher"</p>
         </div>
-        <div class="nav-links">
-            <a href="#philosophy">Philosophy</a>
-            <a href="#capabilities">Capabilities</a>
-            <a href="#mastery">Mastery</a>
-            <a href="#contact" class="btn-cta">Begin Journey</a>
+      </div>
+      <div class="slide">
+        <img src="slideshow-farmer.jpg" alt="Farming">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <span class="pill">Agriculture</span>
+          <h3>Precision Farming</h3>
+          <p class="saying">"Mastery of the land"</p>
         </div>
-    </nav>
-
-    <!-- ═══ Hero ═══ -->
-    <section class="hero">
-        <img src="hero-scene.png?v=2" alt="" class="hero-bg">
-        <div class="hero-overlay"></div>
-
-        <div class="hero-content">
-            <h1 class="hero-title">AI That <span class="gold">Builds</span></h1>
-            <p class="hero-subtitle">— Mastery Through Discipline —</p>
-            <p class="hero-tagline">
-                We don't just deploy AI. We forge <strong>AI Employees</strong> — autonomous agents 
-                trained in your workflows, disciplined in your processes, and 
-                <strong>loyal to your business</strong>. Like a master and student, 
-                we teach until the student surpasses the teacher.
-            </p>
+      </div>
+      <div class="slide">
+        <img src="slideshow-dental.jpg" alt="Healthcare">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <span class="pill">Healthcare</span>
+          <h3>Care Without Chaos</h3>
+          <p class="saying">"Every patient, every time"</p>
         </div>
-    </section>
-
-    <!-- ═══ Philosophy ═══ -->
-    <section class="philosophy" id="philosophy">
-        <div class="philosophy-grid">
-            <div class="philosophy-visual">
-                <img src="section-hands.png" alt="" style="width:100%; max-width:450px; border-radius:16px; border:1px solid rgba(93,137,93,0.15); box-shadow:0 20px 60px rgba(0,0,0,0.3);">
-            </div>
-            <div>
-                <div class="section-label">The Way of the Grasshopper</div>
-                <h2 class="section-title">Technology in Service of <br>Human Potential</h2>
-                <p class="section-text">
-                    The young grasshopper learns by watching, by doing, by failing and rising again. 
-                    So too does our AI — not as a cold tool, but as a <strong>disciplined practitioner</strong> 
-                    of your business. We build AI that doesn't replace people, 
-                    but <strong>elevates them</strong> to focus on what matters.
-                </p>
-                <p class="section-text" style="margin-top:16px;">
-                    Every deployment is a <strong>partnership</strong>. We train your AI Employee 
-                    in the specifics of your practice — your patients, your workflows, your standards — 
-                    until it operates with the precision of a master.
-                </p>
-            </div>
+      </div>
+      <div class="slide">
+        <img src="slideshow-construction.jpg" alt="Construction">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <span class="pill">Construction</span>
+          <h3>Built By Discipline</h3>
+          <p class="saying">"From blueprint to building"</p>
         </div>
-    </section>
-
-    <!-- ═══ Capabilities ═══ -->
-    <section class="capabilities" id="capabilities">
-        <div class="section-label" style="text-align:center;">What We Forge</div>
-        <h2 class="section-title" style="text-align:center;">Capabilities That <span class="gold">Serve</span></h2>
-        <div class="cap-grid">
-            <div class="cap-card">
-                <div class="cap-icon">🧘</div>
-                <h3>Patient Reception</h3>
-                <p>24/7 phone and text answering. Schedule appointments, answer questions, send reminders — all with the warmth of a real front desk.</p>
-            </div>
-            <div class="cap-card">
-                <div class="cap-icon">⚡</div>
-                <h3>Billing & Claims</h3>
-                <p>Process insurance claims, follow up on outstanding balances, and generate billing reports. Your revenue cycle, automated.</p>
-            </div>
-            <div class="cap-card">
-                <div class="cap-icon">📋</div>
-                <h3>Patient Outreach</h3>
-                <p>Recall campaigns, reactivation sequences, review requests. Never let a patient slip through the cracks again.</p>
-            </div>
-            <div class="cap-card">
-                <div class="cap-icon">📊</div>
-                <h3>Intelligence Briefings</h3>
-                <p>Weekly market intelligence, regulatory updates, and actionable insights tailored to your industry — delivered before your Monday meeting.</p>
-            </div>
-            <div class="cap-card">
-                <div class="cap-icon">🔐</div>
-                <h3>Local & Secure</h3>
-                <p>Deploy on your own hardware or our cloud. HIPAA-ready architecture. Your data never leaves your control.</p>
-            </div>
-            <div class="cap-card">
-                <div class="cap-icon">🦗</div>
-                <h3>Continuous Learning</h3>
-                <p>Your AI Employee grows with you. Every interaction makes it smarter. Every workflow we build adds to its mastery.</p>
-            </div>
+      </div>
+      <div class="slide">
+        <img src="slideshow-factory.jpg" alt="Manufacturing">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <span class="pill">Manufacturing</span>
+          <h3>Precision In Motion</h3>
+          <p class="saying">"The line never stops"</p>
         </div>
-    </section>
-
-    <!-- ═══ Mastery ═══ -->
-    <section class="mastery" id="mastery">
-        <div class="section-label" style="text-align:center;">Years of Discipline</div>
-        <h2 class="section-title" style="text-align:center;">The Path to <span class="gold">Mastery</span></h2>
-        <div class="mastery-content" style="margin-top:48px;">
-            <div>
-                <ul class="mastery-list">
-                    <li>
-                        <div class="num">01</div>
-                        <div class="text">
-                            <strong>Observe & Understand</strong>
-                            <span>We study your workflows, your patients, your pain points. Every business is a unique dojo.</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="num">02</div>
-                        <div class="text">
-                            <strong>Build With Precision</strong>
-                            <span>We forge your AI Employee — an autonomous agent trained specifically for your practice. Not a chatbot. An employee.</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="num">03</div>
-                        <div class="text">
-                            <strong>Train & Refine</strong>
-                            <span>We run, test, and refine until the AI operates at master level. Then we keep improving.</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="num">04</div>
-                        <div class="text">
-                            <strong>The Student Surpasses</strong>
-                            <span>Your AI Employee handles the volume. Your human team handles the heart. Together, you achieve what neither could alone.</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="symbol-area">
-                <div class="symbol">⚡</div>
-                <div class="symbol">🦗</div>
-                <div class="symbol">🧘</div>
-            </div>
+      </div>
+      <div class="slide">
+        <img src="slideshow-office.jpg" alt="Business">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <span class="pill">Business</span>
+          <h3>Data That Serves</h3>
+          <p class="saying">"Insight before instinct"</p>
         </div>
-    </section>
+      </div>
+      <div class="slide">
+        <img src="slideshow-creator.jpg" alt="Creative">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <span class="pill">Creative</span>
+          <h3>Create Without Limits</h3>
+          <p class="saying">"Your vision, automated"</p>
+        </div>
+      </div>
+      <!-- Duplicate set -->
+      <div class="slide">
+        <img src="slideshow-master.jpg" alt="The Master">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <span class="pill">The Philosophy</span>
+          <h3>The Master Within</h3>
+          <p class="saying">"The student becomes the teacher"</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="slideshow-farmer.jpg" alt="Farming">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <span class="pill">Agriculture</span>
+          <h3>Precision Farming</h3>
+          <p class="saying">"Mastery of the land"</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="slideshow-dental.jpg" alt="Healthcare">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <span class="pill">Healthcare</span>
+          <h3>Care Without Chaos</h3>
+          <p class="saying">"Every patient, every time"</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="slideshow-construction.jpg" alt="Construction">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <span class="pill">Construction</span>
+          <h3>Built By Discipline</h3>
+          <p class="saying">"From blueprint to building"</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="slideshow-factory.jpg" alt="Manufacturing">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <span class="pill">Manufacturing</span>
+          <h3>Precision In Motion</h3>
+          <p class="saying">"The line never stops"</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="slideshow-office.jpg" alt="Business">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <span class="pill">Business</span>
+          <h3>Data That Serves</h3>
+          <p class="saying">"Insight before instinct"</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="slideshow-creator.jpg" alt="Creative">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <span class="pill">Creative</span>
+          <h3>Create Without Limits</h3>
+          <p class="saying">"Your vision, automated"</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- ═══ CTA ═══ -->
-    <section class="cta-section" id="contact">
-        <h2>Ready to Begin<br>Your Journey?</h2>
-        <p>Every master was once a student. Every great AI Employee started with a conversation. Let's begin yours.</p>
-        <a href="mailto:hello@younggrasshopper.io" class="cta-button">Start Your Path</a>
-    </section>
+  <!-- ═══ About / Philosophy ═══ -->
+  <section class="about-section">
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="about-circle">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
+      <div>
+        <div class="section-label">The Way of the Grasshopper</div>
+        <h2 class="section-title">Technology in Service of <br>Human Potential</h2>
+        <p class="section-text">
+          The young grasshopper learns by watching, by doing, by failing and rising again. 
+          So too does our AI — not as a cold tool, but as a <strong>disciplined practitioner</strong> 
+          of your business. We build AI that doesn't replace people, 
+          but <strong>elevates them</strong> to focus on what matters.
+        </p>
+        <p class="section-text" style="margin-top:16px;">
+          Every deployment is a <strong>partnership</strong>. We train your AI Employee 
+          in the specifics of your work — your customers, your workflows, your standards — 
+          until it operates with the precision of a master.
+        </p>
+        <div class="about-symbols">
+          <div class="about-symbol">⚡</div>
+          <div class="about-symbol">🦗</div>
+          <div class="about-symbol">🧘</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- ═══ Footer ═══ -->
-    <footer>
-        <p>YOUNG GRASSHOPPER LLC · Danville, Iowa · AI Employee Orchestration</p>
-    </footer>
+  <!-- ═══ How It Works ═══ -->
+  <section class="how-section">
+    <div class="section-label" style="text-align:center;">The Path to Mastery</div>
+    <h2 class="section-title" style="text-align:center;">How We <span class="gold">Build</span></h2>
+    <div class="steps-grid">
+      <div class="step-card card">
+        <div class="step-num">01</div>
+        <h3>Observe & Understand</h3>
+        <p>We study your workflows, your customers, your pain points. Every business is a unique dojo.</p>
+      </div>
+      <div class="step-card card">
+        <div class="step-num">02</div>
+        <h3>Build With Precision</h3>
+        <p>We forge your AI Employee — an autonomous agent trained specifically for your work. Not a chatbot. An employee.</p>
+      </div>
+      <div class="step-card card">
+        <div class="step-num">03</div>
+        <h3>Train & Refine</h3>
+        <p>We run, test, and refine until the AI operates at master level. Then we keep improving.</p>
+      </div>
+      <div class="step-card card">
+        <div class="step-num">04</div>
+        <h3>The Student Surpasses</h3>
+        <p>Your AI Employee handles the volume. Your human team handles the heart. Together, you elevate.</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- ═══ Scroll Reveal ═══ -->
-    <script>
-        // Reveal all sections immediately
-        document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  <!-- ═══ Capabilities Teaser (Expandable) ═══ -->
+  <section class="capabilities-teaser">
+    <div class="cap-teaser-header">
+      <div class="section-label">What We Build</div>
+      <h2 class="section-title">An AI Employee Can <span class="gold">Learn</span> Almost Anything</h2>
+      <p class="section-text" style="margin:0 auto; max-width:600px;">
+        Your AI Employee is trained for your specific needs. Here are some of the things 
+        our AI Employees are already doing for businesses like yours.
+      </p>
+    </div>
 
-        // Smooth scroll for nav links
-        document.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventListener('click', (e) => {
-                e.preventDefault();
-                const target = document.querySelector(a.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-    </script>
+    <div class="expandable-card" id="expandCaps">
+      <div class="expandable-header" onclick="toggleCaps()">
+        <h3>See What They Can Do</h3>
+        <span class="expand-icon">+</span>
+      </div>
+      <div class="expandable-body">
+        <div class="caps-grid">
+          <div class="cap-item"><span class="bullet"></span> Answer phones & texts 24/7</div>
+          <div class="cap-item"><span class="bullet"></span> Schedule appointments & send reminders</div>
+          <div class="cap-item"><span class="bullet"></span> Track grain prices & market trends</div>
+          <div class="cap-item"><span class="bullet"></span> Monitor weather & field conditions</div>
+          <div class="cap-item"><span class="bullet"></span> Manage equipment inventory & maintenance</div>
+          <div class="cap-item"><span class="bullet"></span> Process invoices & track payments</div>
+          <div class="cap-item"><span class="bullet"></span> Generate daily briefing reports</div>
+          <div class="cap-item"><span class="bullet"></span> Search for parts & order supplies</div>
+          <div class="cap-item"><span class="bullet"></span> Track crop yields & bushels</div>
+          <div class="cap-item"><span class="bullet"></span> Manage employee schedules & payroll</div>
+          <div class="cap-item"><span class="bullet"></span> Monitor regulatory changes</div>
+          <div class="cap-item"><span class="bullet"></span> Research competitors & market intel</div>
+          <div class="cap-item"><span class="bullet"></span> Fill forms & file reports</div>
+          <div class="cap-item"><span class="bullet"></span> Track deadlines & send alerts</div>
+          <div class="cap-item"><span class="bullet"></span> Answer customer questions</div>
+          <div class="cap-item"><span class="bullet"></span> Manage social media & outreach</div>
+          <div class="cap-item"><span class="bullet"></span> Organize files & digital records</div>
+          <div class="cap-item"><span class="bullet"></span> Create custom reports & dashboards</div>
+          <div class="cap-item"><span class="bullet"></span> Integrate with your existing software</div>
+          <div class="cap-item"><span class="bullet"></span> Learn new skills on demand</div>
+        </div>
+        <div class="expandable-footer">
+          <a href="capabilities.html" class="btn-outline">View Full Capabilities</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA ═══ -->
+  <section class="cta-section">
+    <h2>Ready to Begin<br>Your Journey?</h2>
+    <p>Every master was once a student. Every great AI Employee started with a conversation. Let's begin yours.</p>
+    <a href="contact.html" class="btn-primary">Start Your Path</a>
+  </section>
+
+  <!-- ═══ Footer ═══ -->
+  <footer>
+    <p>YOUNG GRASSHOPPER LLC · Danville, Iowa</p>
+    <p><a href="mailto:hello@younggrasshopper.io">hello@younggrasshopper.io</a> · <a href="contact.html">Contact Us</a></p>
+  </footer>
+
+  <script>
+    // ── Expandable capabilities ──
+    function toggleCaps() {
+      document.getElementById('expandCaps').classList.toggle('expanded');
+    }
+
+    // ── Scroll reveal ──
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up, .scroll-reveal').forEach(el => revealObserver.observe(el));
+
+    // ── Smooth scroll for anchor links ──
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
 </body>
 </html>
