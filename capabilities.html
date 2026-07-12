@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capabilities — Young Grasshopper</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* ═══ CAPABILITIES PAGE SPECIFIC STYLES ═══ */
+
+    /* ── Page hero ── */
+    .page-hero .hero-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ── Category intro ── */
+    .categories-intro {
+      text-align: center;
+      padding: 80px 48px 0;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ── Capabilities grid ── */
+    .capabilities-section {
+      padding: 80px 48px 120px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .capabilities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .cap-card {
+      background: linear-gradient(145deg, var(--bg-card-hover), var(--bg-card));
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 36px 28px 32px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .cap-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .cap-card:hover::before { opacity: 1; }
+    .cap-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(212, 175, 55, 0.2);
+      box-shadow: var(--shadow-card);
+    }
+    .cap-card .cat-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .cap-card h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .cap-card .cat-count {
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .cap-card .cap-list {
+      list-style: none;
+      padding: 0;
+    }
+    .cap-card .cap-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      border-bottom: 1px solid rgba(93, 137, 93, 0.06);
+    }
+    .cap-card .cap-list li:last-child {
+      border-bottom: none;
+    }
+    .cap-card .cap-list li .dot {
+      width: 5px;
+      height: 5px;
+      min-width: 5px;
+      background: var(--gold);
+      border-radius: 50%;
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+
+    /* ── Stats bar ── */
+    .stats-bar {
+      background: linear-gradient(180deg, var(--bg-primary), #0d1a0d);
+      padding: 80px 48px;
+      text-align: center;
+    }
+    .stats-bar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+    .stat-item {
+      padding: 24px;
+    }
+    .stat-item .stat-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-item .stat-label {
+      font-size: 12px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .capabilities-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 768px) {
+      .capabilities-grid {
+        grid-template-columns: 1fr;
+      }
+      .capabilities-section {
+        padding: 60px 20px 80px;
+      }
+      .categories-intro {
+        padding: 60px 20px 0;
+      }
+      .stats-bar-inner {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+      .stat-item .stat-num {
+        font-size: 32px;
+      }
+      .cap-card {
+        padding: 28px 24px 24px;
+      }
+    }
+    @media (max-width: 480px) {
+      .stats-bar-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ Navigation ═══ -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      Young Grasshopper
+      <small>AI Employee Orchestration</small>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="for-farmers.html">For Farmers</a>
+      <a href="for-individuals.html">For Individuals</a>
+      <a href="capabilities.html" class="active">Capabilities</a>
+      <a href="contact.html" class="btn-nav">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- ═══ Page Hero ═══ -->
+  <section class="page-hero">
+    <div class="hero-icon">🦗</div>
+    <h1><span class="gold">Capabilities</span> That Serve</h1>
+    <p>
+      Your AI Employee is not a chatbot — it's a trained, disciplined member of your team. 
+      Here's what it can do for your business.
+    </p>
+    <div class="hero-bg-icon">⚙</div>
+  </section>
+
+  <!-- ═══ Categories Intro ═══ -->
+  <div class="categories-intro">
+    <div class="section-label">The Full Arsenal</div>
+    <h2 class="section-title">30 Capabilities, <span class="gold">One Employee</span></h2>
+    <p class="section-text" style="margin:0 auto;">
+      From answering phones to generating financial summaries, each AI Employee is trained 
+      across five domains of expertise — and can learn anything new on demand.
+    </p>
+  </div>
+
+  <!-- ═══ Capabilities Grid ═══ -->
+  <section class="capabilities-section">
+
+    <div class="capabilities-grid">
+
+      <!-- Category 1: Communication & Customer Relations -->
+      <div class="cap-card">
+        <span class="cat-icon">💬</span>
+        <h3>Communication &amp; Customer Relations</h3>
+        <span class="cat-count">6 Capabilities</span>
+        <ul class="cap-list">
+          <li><span class="dot"></span> Answer phones &amp; texts 24/7 — never miss a lead</li>
+          <li><span class="dot"></span> Schedule appointments &amp; send smart reminders</li>
+          <li><span class="dot"></span> Manage customer inquiries across every channel</li>
+          <li><span class="dot"></span> Send personalized follow-ups automatically</li>
+          <li><span class="dot"></span> Handle returns, complaints &amp; service issues</li>
+          <li><span class="dot"></span> Manage social media presence &amp; engagement</li>
+        </ul>
+      </div>
+
+      <!-- Category 2: Operations & Administration -->
+      <div class="cap-card">
+        <span class="cat-icon">📋</span>
+        <h3>Operations &amp; Administration</h3>
+        <span class="cat-count">6 Capabilities</span>
+        <ul class="cap-list">
+          <li><span class="dot"></span> Process invoices &amp; track payments in real time</li>
+          <li><span class="dot"></span> Manage inventory levels &amp; reorder supplies</li>
+          <li><span class="dot"></span> Fill forms, submit reports &amp; handle paperwork</li>
+          <li><span class="dot"></span> Track deadlines &amp; send proactive alerts</li>
+          <li><span class="dot"></span> Manage employee schedules &amp; shift coverage</li>
+          <li><span class="dot"></span> Organize digital files &amp; maintain records</li>
+        </ul>
+      </div>
+
+      <!-- Category 3: Data & Intelligence -->
+      <div class="cap-card">
+        <span class="cat-icon">📊</span>
+        <h3>Data &amp; Intelligence</h3>
+        <span class="cat-count">6 Capabilities</span>
+        <ul class="cap-list">
+          <li><span class="dot"></span> Monitor market prices, trends &amp; volatility</li>
+          <li><span class="dot"></span> Track weather conditions &amp; field forecasts</li>
+          <li><span class="dot"></span> Generate daily briefing reports every morning</li>
+          <li><span class="dot"></span> Research competitors, news &amp; industry shifts</li>
+          <li><span class="dot"></span> Monitor regulatory changes &amp; compliance updates</li>
+          <li><span class="dot"></span> Create custom reports &amp; interactive dashboards</li>
+        </ul>
+      </div>
+
+      <!-- Category 4: Financial & Compliance -->
+      <div class="cap-card">
+        <span class="cat-icon">💰</span>
+        <h3>Financial &amp; Compliance</h3>
+        <span class="cat-count">6 Capabilities</span>
+        <ul class="cap-list">
+          <li><span class="dot"></span> Track expenses &amp; auto-categorize transactions</li>
+          <li><span class="dot"></span> Process billing, claims &amp; insurance paperwork</li>
+          <li><span class="dot"></span> Follow up on overdue payments automatically</li>
+          <li><span class="dot"></span> Generate financial summaries &amp; P&amp;L snapshots</li>
+          <li><span class="dot"></span> Ensure regulatory compliance across operations</li>
+          <li><span class="dot"></span> Prepare audit trails &amp; maintain documentation</li>
+        </ul>
+      </div>
+
+      <!-- Category 5: Growth & Learning -->
+      <div class="cap-card">
+        <span class="cat-icon">🌱</span>
+        <h3>Growth &amp; Learning</h3>
+        <span class="cat-count">6 Capabilities</span>
+        <ul class="cap-list">
+          <li><span class="dot"></span> Research new business opportunities &amp; grants</li>
+          <li><span class="dot"></span> Analyze customer data &amp; identify patterns</li>
+          <li><span class="dot"></span> Manage email marketing campaigns &amp; lists</li>
+          <li><span class="dot"></span> Track sales leads &amp; nurture pipelines</li>
+          <li><span class="dot"></span> Learn new tools, software &amp; workflows on demand</li>
+          <li><span class="dot"></span> Integrate with existing systems &amp; APIs</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ Stats Bar ═══ -->
+  <div class="stats-bar">
+    <div class="stats-bar-inner">
+      <div class="stat-item">
+        <div class="stat-num">30</div>
+        <div class="stat-label">Built-in Capabilities</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Expertise Domains</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">Always On Duty</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">Expandable Skills</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ CTA ═══ -->
+  <section class="cta-section">
+    <h2>What Will Your<br>AI Employee Do?</h2>
+    <p>Every capability starts with a conversation. Tell us what your business needs — we'll build an AI Employee trained for exactly that.</p>
+    <a href="contact.html" class="btn-primary">Start Your Journey</a>
+  </section>
+
+  <!-- ═══ Footer ═══ -->
+  <footer>
+    <p>YOUNG GRASSHOPPER LLC · Danville, Iowa</p>
+    <p><a href="mailto:hello@younggrasshopper.io">hello@younggrasshopper.io</a> · <a href="contact.html">Contact Us</a></p>
+  </footer>
+
+  <script>
+    // ── Scroll reveal ──
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up, .scroll-reveal').forEach(el => revealObserver.observe(el));
+
+    // ── Smooth scroll for anchor links ──
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+
+</body>
+</html>
