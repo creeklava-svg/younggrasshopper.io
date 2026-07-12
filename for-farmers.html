@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Farmers — Young Grasshopper</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* ═══ BIG PROMISE ═══ */
+    .promise-section { background: linear-gradient(180deg, #0d1a0d, var(--bg-primary)); }
+    .promise-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .promise-headline {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 36px;
+      line-height: 1.3;
+      margin-bottom: 20px;
+    }
+    .promise-benefits {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .promise-benefit {
+      background: linear-gradient(145deg, #111a11, #0d150d);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .promise-benefit:hover {
+      border-color: rgba(212, 175, 55, 0.2);
+      transform: translateY(-2px);
+    }
+    .promise-benefit .icon { font-size: 28px; margin-bottom: 8px; }
+    .promise-benefit h4 { font-size: 15px; margin-bottom: 4px; }
+    .promise-benefit p { font-size: 12px; color: var(--text-dim); }
+
+    /* ═══ SAVINGS SECTION ═══ */
+    .savings-section { background: var(--bg-secondary); }
+    .savings-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .savings-card {
+      text-align: center;
+      padding: 36px 20px;
+    }
+    .savings-card .s-icon { font-size: 32px; margin-bottom: 12px; }
+    .savings-card h3 { font-size: 18px; margin-bottom: 8px; }
+    .savings-card p { font-size: 13px; color: var(--text-muted); line-height: 1.7; font-weight: 300; }
+
+    /* ═══ FARMER CAPABILITIES ═══ */
+    .farm-caps-section { background: #0d0f0d; }
+    .farm-caps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 48px;
+    }
+    .farm-cap-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .farm-cap-item:hover {
+      background: rgba(109, 163, 109, 0.05);
+      color: var(--text-primary);
+    }
+    .farm-cap-item .bullet {
+      width: 5px; height: 5px;
+      background: var(--gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ═══ HOW IT WORKS (farmers) ═══ */
+    .farm-how-section { background: var(--bg-primary); }
+    .farm-steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .farm-step-card {
+      text-align: center;
+      padding: 36px 24px;
+    }
+    .farm-step-card .step-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: rgba(212, 175, 55, 0.1);
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+    .farm-step-card h3 { font-size: 18px; margin-bottom: 10px; }
+    .farm-step-card p { font-size: 14px; color: var(--text-muted); line-height: 1.7; font-weight: 300; }
+
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 768px) {
+      .promise-grid { grid-template-columns: 1fr; gap: 40px; }
+      .promise-benefits { grid-template-columns: 1fr; }
+      .promise-headline { font-size: 26px; }
+      .savings-grid, .farm-steps-grid { grid-template-columns: 1fr; }
+      .farm-caps-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- ═══ Navigation ═══ -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      Young Grasshopper
+      <small>AI Employee Orchestration</small>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="for-farmers.html" class="active">For Farmers</a>
+      <a href="for-individuals.html">For Individuals</a>
+      <a href="capabilities.html">Capabilities</a>
+      <a href="contact.html" class="btn-nav">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- ═══ Page Hero ═══ -->
+  <section class="page-hero">
+    <div class="hero-bg-icon">🌾</div>
+    <h1>The AI Employee for <span class="gold">Your Farm</span></h1>
+    <p>Built for the way you work. From grain markets to equipment maintenance — an AI that knows your operation as well as you do.</p>
+  </section>
+
+  <!-- ═══ The Big Promise ═══ -->
+  <section class="promise-section">
+    <div class="promise-grid">
+      <div>
+        <div class="section-label">The Big Promise</div>
+        <h2 class="promise-headline">What if you had a farmhand who never sleeps, never forgets, and costs a fraction of a hired hand?</h2>
+        <p class="section-text">
+          Your AI Employee works 24/7 monitoring markets, watching the weather, tracking equipment, handling paperwork, and answering calls. It remembers every detail about your operation — your fields, your equipment, your yields, your preferences. And it costs less than you'd think.
+        </p>
+      </div>
+      <div class="promise-benefits">
+        <div class="promise-benefit">
+          <div class="icon">🌽</div>
+          <h4>Track Grain Prices 24/7</h4>
+          <p>Real-time corn, bean, and wheat prices. Alerts when your targets hit.</p>
+        </div>
+        <div class="promise-benefit">
+          <div class="icon">🌤</div>
+          <h4>Monitor Your Fields</h4>
+          <p>Live weather, frost alerts, drought warnings. Know before it hits.</p>
+        </div>
+        <div class="promise-benefit">
+          <div class="icon">🚜</div>
+          <h4>Manage Equipment</h4>
+          <p>Service reminders, parts search, maintenance logs. No more surprises.</p>
+        </div>
+        <div class="promise-benefit">
+          <div class="icon">📋</div>
+          <h4>Handle the Paperwork</h4>
+          <p>USDA reports, insurance forms, invoices. Hours back in your day.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Time & Money Savings ═══ -->
+  <section class="savings-section">
+    <div class="section-label" style="text-align:center;">Time & Money</div>
+    <h2 class="section-title" style="text-align:center;">What You <span class="gold">Gain</span></h2>
+    <div class="savings-grid">
+      <div class="savings-card card">
+        <div class="s-icon">⏰</div>
+        <h3>Hours Back in Your Day</h3>
+        <p>Stop answering calls, chasing paperwork, and searching for part numbers. Your AI handles it all while you're in the field.</p>
+      </div>
+      <div class="savings-card card">
+        <div class="s-icon">💰</div>
+        <h3>Never Miss a Pricing Window</h3>
+        <p>Grain prices move fast. Your AI watches them 24/7 and alerts you the moment your target is hit — day or night.</p>
+      </div>
+      <div class="savings-card card">
+        <div class="s-icon">📄</div>
+        <h3>Less Paperwork, More Field Time</h3>
+        <p>USDA reports, crop insurance forms, spreadsheets — automated. What used to take hours now takes seconds.</p>
+      </div>
+      <div class="savings-card card">
+        <div class="s-icon">🔧</div>
+        <h3>Equipment Downtime Reduced</h3>
+        <p>Service reminders keep you ahead of breakdowns. Parts ordering is one conversation away. Your combine stays in the field.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Farmer Capabilities ═══ -->
+  <section class="farm-caps-section">
+    <div class="section-label" style="text-align:center;">Your Farm, Amplified</div>
+    <h2 class="section-title" style="text-align:center;">What Your AI Employee Does <br><span class="gold">For Your Farm</span></h2>
+    <div class="farm-caps-grid">
+      <div class="farm-cap-item"><span class="bullet"></span> Track corn, soybean, and wheat prices in real-time</div>
+      <div class="farm-cap-item"><span class="bullet"></span> Alert you when grain prices hit your target</div>
+      <div class="farm-cap-item"><span class="bullet"></span> Monitor field conditions and hyperlocal weather</div>
+      <div class="farm-cap-item"><span class="bullet"></span> Track planting and harvest windows</div>
+      <div class="farm-cap-item"><span class="bullet"></span> Manage equipment inventory and service schedules</div>
+      <div class="farm-cap-item"><span class="bullet"></span> Search for used parts and equipment nationwide</div>
+      <div class="farm-cap-item"><span class="bullet"></span> Generate daily farm briefings every morning</div>
+      <div class="farm-cap-item"><span class="bullet"></span> Track bushels stored, sold, and unpriced</div>
+      <div class="farm-cap-item"><span class="bullet"></span> Calculate drying costs and moisture adjustments</div>
+      <div class="farm-cap-item"><span class="bullet"></span> Manage employee hours and payroll records</div>
+      <div class="farm-cap-item"><span class="bullet"></span> Track crop insurance deadlines and coverage</div>
+      <div class="farm-cap-item"><span class="bullet"></span> File USDA reports and paperwork</div>
+      <div class="farm-cap-item"><span class="bullet"></span> Monitor commodity futures and options</div>
+      <div class="farm-cap-item"><span class="bullet"></span> Alert on frost, drought, and storm risks</div>
+      <div class="farm-cap-item"><span class="bullet"></span> Manage input costs (seed, fertilizer, chemical)</div>
+      <div class="farm-cap-item"><span class="bullet"></span> Track fuel usage and costs across equipment</div>
+      <div class="farm-cap-item"><span class="bullet"></span> Maintain spray logs and application records</div>
+      <div class="farm-cap-item"><span class="bullet"></span> Research best practices and new techniques</div>
+      <div class="farm-cap-item"><span class="bullet"></span> Answer customer and vendor calls 24/7</div>
+      <div class="farm-cap-item"><span class="bullet"></span> Track grain contracts and delivery schedules</div>
+      <div class="farm-cap-item"><span class="bullet"></span> Log field activities and tillage records</div>
+      <div class="farm-cap-item"><span class="bullet"></span> Track soil tests and nutrient management</div>
+      <div class="farm-cap-item"><span class="bullet"></span> Monitor basis levels and local price differences</div>
+      <div class="farm-cap-item"><span class="bullet"></span> Generate end-of-year profit and loss summaries</div>
+      <div class="farm-cap-item"><span class="bullet"></span> Learn new farm-specific skills on demand</div>
+    </div>
+  </section>
+
+  <!-- ═══ How It Works ═══ -->
+  <section class="farm-how-section">
+    <div class="section-label" style="text-align:center;">How It Works</div>
+    <h2 class="section-title" style="text-align:center;">From Conversation to <span class="gold">Coworker</span></h2>
+    <div class="farm-steps-grid">
+      <div class="farm-step-card card">
+        <div class="step-num">01</div>
+        <h3>Tell Us About Your Farm</h3>
+        <p>We learn about your operation — acres, crops, equipment, goals. No two farms are alike, and your AI won't be either.</p>
+      </div>
+      <div class="farm-step-card card">
+        <div class="step-num">02</div>
+        <h3>We Build Your AI Employee</h3>
+        <p>Trained specifically for your farm — your grain bins, your equipment, your suppliers, your way of doing things.</p>
+      </div>
+      <div class="farm-step-card card">
+        <div class="step-num">03</div>
+        <h3>We Run It Together</h3>
+        <p>Your AI goes live. We refine until it knows your operation inside and out. Then we keep improving.</p>
+      </div>
+      <div class="farm-step-card card">
+        <div class="step-num">04</div>
+        <h3>You Focus on Farming</h3>
+        <p>Your AI handles the noise — markets, weather, paperwork. You handle the dirt, the crops, and the decisions.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA ═══ -->
+  <section class="cta-section">
+    <h2>Ready to Put an AI<br>on Your <span class="gold">Farm?</span></h2>
+    <p>Stop by the shop and let's talk. Tell us about your operation, and we'll show you what an AI Employee can do for it.</p>
+    <a href="contact.html" class="btn-primary">Start Your Farm's AI</a>
+  </section>
+
+  <!-- ═══ Footer ═══ -->
+  <footer>
+    <p>YOUNG GRASSHOPPER LLC · Danville, Iowa</p>
+    <p><a href="mailto:hello@younggrasshopper.io">hello@younggrasshopper.io</a> · <a href="contact.html">Contact Us</a></p>
+  </footer>
+
+  <script>
+    // ── Scroll reveal ──
+    document.querySelectorAll('.fade-up, .scroll-reveal').forEach(el => {
+      new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.1 }).observe(el);
+    });
+  </script>
+</body>
+</html>
