@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Young Grasshopper — For Individuals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* ═══ FOR INDIVIDUALS — PAGE SPECIFIC STYLES ═══ */
+
+    /* ── Hero ── */
+    .individuals-hero {
+      background: linear-gradient(180deg, #0d1a0d, var(--bg-primary));
+      position: relative;
+    }
+    .individuals-hero::before {
+      content: '🦗';
+      position: absolute;
+      font-size: 280px;
+      opacity: 0.025;
+      pointer-events: none;
+      animation: float 10s ease-in-out infinite;
+      right: 5%;
+      bottom: 5%;
+    }
+    .individuals-hero .hero-content {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 24px;
+    }
+    .individuals-hero .hero-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 56px;
+      font-weight: 700;
+      color: #f0f5f0;
+      margin-bottom: 8px;
+      animation: fadeUp 1.2s ease 0.3s both;
+    }
+    .individuals-hero .hero-subtitle {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: #d8e8d8;
+      font-style: italic;
+      letter-spacing: 2px;
+      margin-bottom: 24px;
+      animation: fadeUp 1.2s ease 0.5s both;
+    }
+    .individuals-hero .hero-tagline {
+      max-width: 620px;
+      font-size: 17px;
+      line-height: 1.8;
+      color: var(--text-muted);
+      font-weight: 300;
+      animation: fadeUp 1.2s ease 0.7s both;
+    }
+    .individuals-hero .hero-ctas {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+      animation: fadeUp 1.2s ease 0.9s both;
+    }
+
+    /* ── What It Can Do For You ── */
+    .capabilities-intro {
+      background: var(--bg-secondary);
+      text-align: center;
+    }
+    .capabilities-intro .section-text {
+      margin: 0 auto 48px;
+    }
+    .capabilities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .cap-card {
+      padding: 24px 22px;
+      text-align: left;
+    }
+    .cap-card .cap-icon {
+      font-size: 22px;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .cap-card h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    .cap-card p {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    /* ── How It Works ── */
+    .how-individuals {
+      background: linear-gradient(180deg, var(--bg-primary), #0d1a0d);
+    }
+    .how-individuals .section-label,
+    .how-individuals .section-title {
+      text-align: center;
+    }
+    .how-individuals .section-text {
+      margin: 0 auto 12px;
+      text-align: center;
+    }
+    .steps-individuals {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .step-individual {
+      text-align: center;
+      padding: 36px 24px;
+    }
+    .step-individual .step-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: rgba(212, 175, 55, 0.1);
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+    .step-individual h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .step-individual p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── Who Is It For ── */
+    .who-section {
+      background: var(--bg-secondary);
+    }
+    .who-section .section-label,
+    .who-section .section-title {
+      text-align: center;
+    }
+    .who-section .section-text {
+      margin: 0 auto 48px;
+      text-align: center;
+    }
+    .who-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .who-card {
+      text-align: center;
+      padding: 36px 24px 32px;
+    }
+    .who-card .who-icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .who-card h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .who-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .who-card-wide {
+      grid-column: 1 / -1;
+      max-width: 500px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .capabilities-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .who-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .individuals-hero .hero-title { font-size: 32px; }
+      .individuals-hero .hero-subtitle { font-size: 18px; }
+      .individuals-hero .hero-tagline { font-size: 15px; }
+      .individuals-hero .hero-ctas { flex-direction: column; align-items: center; }
+      .individuals-hero::before { font-size: 160px; }
+
+      .capabilities-grid { grid-template-columns: 1fr; }
+      .steps-individuals { grid-template-columns: 1fr; }
+      .who-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .cap-card { padding: 20px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ Navigation ═══ -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      Young Grasshopper
+      <small>AI Employee Orchestration</small>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="for-farmers.html">For Farmers</a>
+      <a href="for-individuals.html" class="active">For Individuals</a>
+      <a href="capabilities.html">Capabilities</a>
+      <a href="contact.html" class="btn-nav">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- ═══ Hero ═══ -->
+  <section class="page-hero individuals-hero">
+    <h1>Your Personal <span class="gold">AI Employee</span></h1>
+    <p class="hero-tagline">
+      An AI that organizes your life, helps you run your side hustle, 
+      and learns what matters to you.
+    </p>
+    <div class="hero-ctas">
+      <a href="#capabilities" class="btn-outline">See What It Can Do</a>
+      <a href="contact.html" class="btn-primary">Get Yours</a>
+    </div>
+    <div class="hero-bg-icon" aria-hidden="true">🦗</div>
+  </section>
+
+  <!-- ═══ What It Can Do For You ═══ -->
+  <section class="capabilities-intro" id="capabilities">
+    <div class="section-label">Your Personal Assistant</div>
+    <h2 class="section-title">What It Can <span class="gold">Do</span> For You</h2>
+    <p class="section-text">
+      Your AI Employee learns your routines, your preferences, and your goals. 
+      It doesn't just follow instructions — it anticipates what you need.
+    </p>
+
+    <div class="capabilities-grid">
+      <div class="cap-card card">
+        <span class="cap-icon">📅</span>
+        <h3>Manage your calendar and schedule</h3>
+        <p>Your AI Employee handles scheduling, reschedules conflicts, and protects your focus time. It knows when you're most productive.</p>
+      </div>
+      <div class="cap-card card">
+        <span class="cap-icon">✅</span>
+        <h3>Track your tasks and projects</h3>
+        <p>From to-do lists to long-running projects, your AI keeps everything organized and reminds you of what's next — so nothing falls through.</p>
+      </div>
+      <div class="cap-card card">
+        <span class="cap-icon">🔍</span>
+        <h3>Research topics and summarize articles</h3>
+        <p>Send it a link or a topic and get back a clear summary. It reads the web so you don't have to — distilling what matters into what you can use.</p>
+      </div>
+      <div class="cap-card card">
+        <span class="cap-icon">✉️</span>
+        <h3>Draft emails and messages</h3>
+        <p>Whether it's a professional email, a follow-up, or a quick reply, your AI drafts in your voice. Review, tweak, send — seconds, not minutes.</p>
+      </div>
+      <div class="cap-card card">
+        <span class="cap-icon">📂</span>
+        <h3>Organize your digital files</h3>
+        <p>Photos, documents, downloads — your AI sorts and tags everything. Find what you need instantly, never hunt through folders again.</p>
+      </div>
+      <div class="cap-card card">
+        <span class="cap-icon">💰</span>
+        <h3>Track your budget and expenses</h3>
+        <p>It monitors your spending, categorizes transactions, and keeps you on track. No spreadsheets. No surprises. Just clarity.</p>
+      </div>
+      <div class="cap-card card">
+        <span class="cap-icon">📡</span>
+        <h3>Monitor news relevant to your interests</h3>
+        <p>Your AI scans headlines, newsletters, and feeds — filtering for what matters to you. A daily briefing tailored to your world.</p>
+      </div>
+      <div class="cap-card card">
+        <span class="cap-icon">📄</span>
+        <h3>Help with job applications and resumes</h3>
+        <p>Tailor your resume, draft cover letters, and track applications. Your AI becomes your job search partner — organized and persistent.</p>
+      </div>
+      <div class="cap-card card">
+        <span class="cap-icon">✈️</span>
+        <h3>Plan trips and itineraries</h3>
+        <p>Tell it where and when, and your AI researches flights, books options, and builds a day-by-day itinerary. Travel planning, simplified.</p>
+      </div>
+      <div class="cap-card card">
+        <span class="cap-icon">🎓</span>
+        <h3>Learn new skills with you</h3>
+        <p>Your AI recommends resources, quizzes you, and tracks your progress. Whether it's a language, coding, or a hobby — you learn together.</p>
+      </div>
+      <div class="cap-card card">
+        <span class="cap-icon">🏪</span>
+        <h3>Manage your small business operations</h3>
+        <p>Running a side hustle? Your AI handles orders, invoices, inventory, and customer follow-ups — so you can focus on the work you love.</p>
+      </div>
+      <div class="cap-card card">
+        <span class="cap-icon">💬</span>
+        <h3>Handle customer inquiries</h3>
+        <p>Your AI responds to customer messages with your brand voice. It answers questions, resolves issues, and escalates when needed — 24/7.</p>
+      </div>
+      <div class="cap-card card">
+        <span class="cap-icon">⏰</span>
+        <h3>Track deadlines and send reminders</h3>
+        <p>Never miss a deadline again. Your AI watches your commitments and nags you gently — bills, renewals, submissions, all accounted for.</p>
+      </div>
+      <div class="cap-card card">
+        <span class="cap-icon">📝</span>
+        <h3>Keep notes and organize information</h3>
+        <p>Capture ideas, meeting notes, and random thoughts. Your AI categorizes, links, and surfaces them later — exactly when you need them.</p>
+      </div>
+      <div class="cap-card card">
+        <span class="cap-icon">🔗</span>
+        <h3>Integrate with your calendar, email, and tools</h3>
+        <p>Your AI connects to the apps you already use — Google Calendar, Gmail, Notion, and more. It works where you work.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ How It Works ═══ -->
+  <section class="how-individuals">
+    <div class="section-label">Your Journey</div>
+    <h2 class="section-title">How It <span class="gold">Works</span></h2>
+    <p class="section-text" style="max-width:600px;">
+      Getting your personal AI Employee is simple. We take it from first conversation to daily partner.
+    </p>
+
+    <div class="steps-individuals">
+      <div class="step-individual card">
+        <div class="step-num">01</div>
+        <h3>Tell Us About You</h3>
+        <p>We chat about your life, your goals, and what you need help with. No jargon, no pressure — just a conversation.</p>
+      </div>
+      <div class="step-individual card">
+        <div class="step-num">02</div>
+        <h3>We Build Your AI</h3>
+        <p>We create your personal AI Employee — trained on your routines, preferences, and priorities. It's yours from day one.</p>
+      </div>
+      <div class="step-individual card">
+        <div class="step-num">03</div>
+        <h3>You Train Together</h3>
+        <p>You use it, give feedback, and it learns. The more you interact, the better it understands you — like a great assistant who's been with you for years.</p>
+      </div>
+      <div class="step-individual card">
+        <div class="step-num">04</div>
+        <h3>It Just Works</h3>
+        <p>Your AI handles the busywork — scheduling, organizing, researching, reminding. You focus on what actually matters to you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Who Is It For ═══ -->
+  <section class="who-section">
+    <div class="section-label">Who Needs This</div>
+    <h2 class="section-title">Designed for <span class="gold">Real People</span></h2>
+    <p class="section-text" style="max-width:600px;">
+      Whether you're climbing the career ladder, building something of your own, or just trying to keep up — your AI Employee meets you where you are.
+    </p>
+
+    <div class="who-grid">
+      <div class="who-card card">
+        <span class="who-icon">💼</span>
+        <h3>Busy Professionals</h3>
+        <p>Juggling meetings, deadlines, and inbox overload? Your AI handles the chaos so you can focus on the work that moves your career forward.</p>
+      </div>
+      <div class="who-card card">
+        <span class="who-icon">🚀</span>
+        <h3>Side Hustlers</h3>
+        <p>Running a business on top of your day job? Your AI manages customers, orders, and follow-ups — so your side hustle grows without burning you out.</p>
+      </div>
+      <div class="who-card card">
+        <span class="who-icon">📚</span>
+        <h3>Students</h3>
+        <p>Between classes, assignments, and deadlines, your AI keeps you organized, researches topics, and helps you stay on top of your studies.</p>
+      </div>
+      <div class="who-card card">
+        <span class="who-icon">🎨</span>
+        <h3>Creators</h3>
+        <p>You make the art. Your AI handles the admin — scheduling, emails, commissions, and the business side of creativity. More time to create.</p>
+      </div>
+      <div class="who-card card who-card-wide">
+        <span class="who-icon">🧑‍🤝‍🧑</span>
+        <h3>Anyone Who Wants an AI Assistant</h3>
+        <p>You don't need a title or a business to deserve an AI that helps you. If you've ever wished for an extra pair of hands — this is for you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA ═══ -->
+  <section class="cta-section">
+    <h2>Your AI Employee<br>Is Waiting</h2>
+    <p>You don't have to do everything alone. Let's build an AI that works for you — your way, your life, your terms.</p>
+    <a href="contact.html" class="btn-primary">Start Your Journey</a>
+  </section>
+
+  <!-- ═══ Footer ═══ -->
+  <footer>
+    <p>YOUNG GRASSHOPPER LLC · Danville, Iowa</p>
+    <p><a href="mailto:hello@younggrasshopper.io">hello@younggrasshopper.io</a> · <a href="contact.html">Contact Us</a></p>
+  </footer>
+
+  <script>
+    // ── Scroll reveal ──
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up, .scroll-reveal').forEach(el => revealObserver.observe(el));
+
+    // ── Smooth scroll for anchor links ──
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
