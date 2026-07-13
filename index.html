@@ -121,14 +121,9 @@
       overflow: hidden;
     }
     .slideshow-track {
-      display: inline-flex;
+      display: flex;
       gap: 0;
-      animation: scrollSlides 60s linear infinite;
-    }
-    .slideshow-track:hover { animation-play-state: paused; }
-    @keyframes scrollSlides {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      will-change: transform;
     }
     .slide {
       min-width: 380px;
@@ -492,79 +487,6 @@
           <p class="saying">"Insight before instinct"</p>
         </div>
       </div>
-      <div class="slide">
-        <img src="slideshow-creator.jpg" alt="Creative">
-        <div class="slide-overlay"></div>
-        <div class="slide-content">
-          <span class="pill">Creative</span>
-          <h3>Create Without Limits</h3>
-          <p class="saying">"Your vision, automated"</p>
-        </div>
-      </div>
-      <!-- Duplicate set -->
-      <div class="slide">
-        <img src="slideshow-master.jpg" alt="The Master">
-        <div class="slide-overlay"></div>
-        <div class="slide-content">
-          <span class="pill">The Philosophy</span>
-          <h3>The Master Within</h3>
-          <p class="saying">"The student becomes the teacher"</p>
-        </div>
-      </div>
-      <div class="slide">
-        <img src="slideshow-farmer.jpg" alt="Farming">
-        <div class="slide-overlay"></div>
-        <div class="slide-content">
-          <span class="pill">Agriculture</span>
-          <h3>Precision Farming</h3>
-          <p class="saying">"Mastery of the land"</p>
-        </div>
-      </div>
-      <div class="slide">
-        <img src="slideshow-dental.jpg" alt="Healthcare">
-        <div class="slide-overlay"></div>
-        <div class="slide-content">
-          <span class="pill">Healthcare</span>
-          <h3>Care Without Chaos</h3>
-          <p class="saying">"Every patient, every time"</p>
-        </div>
-      </div>
-      <div class="slide">
-        <img src="slideshow-construction.jpg" alt="Construction">
-        <div class="slide-overlay"></div>
-        <div class="slide-content">
-          <span class="pill">Construction</span>
-          <h3>Built By Discipline</h3>
-          <p class="saying">"From blueprint to building"</p>
-        </div>
-      </div>
-      <div class="slide">
-        <img src="slideshow-factory.jpg" alt="Manufacturing">
-        <div class="slide-overlay"></div>
-        <div class="slide-content">
-          <span class="pill">Manufacturing</span>
-          <h3>Precision In Motion</h3>
-          <p class="saying">"The line never stops"</p>
-        </div>
-      </div>
-      <div class="slide">
-        <img src="slideshow-office.jpg" alt="Business">
-        <div class="slide-overlay"></div>
-        <div class="slide-content">
-          <span class="pill">Business</span>
-          <h3>Data That Serves</h3>
-          <p class="saying">"Insight before instinct"</p>
-        </div>
-      </div>
-      <div class="slide">
-        <img src="slideshow-creator.jpg" alt="Creative">
-        <div class="slide-overlay"></div>
-        <div class="slide-content">
-          <span class="pill">Creative</span>
-          <h3>Create Without Limits</h3>
-          <p class="saying">"Your vision, automated"</p>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -690,6 +612,39 @@
   </footer>
 
   <script>
+    // ── Seamless slideshow (JavaScript-powered, no CSS animation glitches) ──
+    (function() {
+      const track = document.querySelector('.slideshow-track');
+      if (!track) return;
+      const slides = track.children;
+      // Clone all slides for seamless loop
+      for (let i = 0; i < slides.length; i++) {
+        const clone = slides[i].cloneNode(true);
+        track.appendChild(clone);
+      }
+      let pos = 0;
+      const speed = 0.5; // pixels per frame
+      let paused = false;
+      const slideWidth = slides[0].offsetWidth + 24; // width + margin
+      const totalSlides = slides.length;
+      const halfWidth = slideWidth * totalSlides;
+      
+      track.addEventListener('mouseenter', () => { paused = true; });
+      track.addEventListener('mouseleave', () => { paused = false; });
+      
+      function scrollSlides() {
+        if (!paused) {
+          pos -= speed;
+          if (pos <= -halfWidth) {
+            pos = 0;
+          }
+          track.style.transform = `translateX(${pos}px)`;
+        }
+        requestAnimationFrame(scrollSlides);
+      }
+      requestAnimationFrame(scrollSlides);
+    })();
+
     // ── Expandable capabilities ──
     function toggleCaps() {
       document.getElementById('expandCaps').classList.toggle('expanded');
