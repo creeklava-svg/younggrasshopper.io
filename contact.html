@@ -9,338 +9,30 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <style>
-    /* ═══ CONTACT METHODS ═══ */
-    .contact-methods {
-      background: var(--bg-secondary);
-    }
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-top: 48px;
-    }
-    .contact-card {
-      text-align: center;
-      padding: 48px 32px;
-    }
+    .contact-methods { background: var(--bg-secondary); }
+    .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+    .contact-card { text-align: center; padding: 48px 32px; }
     .contact-card .icon-wrap {
-      width: 64px; height: 64px;
-      margin: 0 auto 20px;
-      border-radius: 50%;
+      width: 64px; height: 64px; margin: 0 auto 20px; border-radius: 50%;
       background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(109, 163, 109, 0.05));
-      border: 1px solid rgba(212, 175, 55, 0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      transition: var(--transition);
+      border: 1px solid rgba(212, 175, 55, 0.15); display: flex; align-items: center; justify-content: center;
+      font-size: 24px; transition: var(--transition);
     }
-    .contact-card:hover .icon-wrap {
-      background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(109, 163, 109, 0.1));
-      border-color: rgba(212, 175, 55, 0.3);
-      transform: scale(1.05);
-    }
-    .contact-card h3 {
-      font-size: 20px;
-      margin-bottom: 8px;
-    }
-    .contact-card .contact-link {
-      display: block;
-      font-size: 18px;
-      color: var(--gold);
-      text-decoration: none;
-      font-weight: 500;
-      margin-bottom: 10px;
-      transition: var(--transition);
-    }
-    .contact-card .contact-link:hover { color: #e8c040; }
-    .contact-card p {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    /* ═══ CHAT WIDGET TOGGLE ═══ */
-    .chat-toggle {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      width: 56px; height: 56px;
-      border-radius: 50%;
-      background: var(--gold-gradient);
-      border: none;
-      color: var(--bg-primary);
-      font-size: 24px;
-      cursor: pointer;
-      z-index: 1000;
-      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
-      transition: var(--transition);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .chat-toggle:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 30px rgba(212, 175, 55, 0.4);
-    }
-    .chat-toggle .close-icon { display: none; }
-    .chat-toggle.active .chat-icon { display: none; }
-    .chat-toggle.active .close-icon { display: block; }
-
-    /* ═══ CHAT WIDGET PANEL ═══ */
-    .chat-panel {
-      position: fixed;
-      bottom: 92px;
-      right: 24px;
-      width: 380px;
-      height: 560px;
-      background: linear-gradient(180deg, #0d150d, #080c08);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius-lg);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-      z-index: 999;
-      display: none;
-      flex-direction: column;
-      overflow: hidden;
-      animation: slideUp 0.3s ease;
-    }
-    .chat-panel.open { display: flex; }
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── Chat Header ── */
-    .chat-header {
-      padding: 16px 20px;
-      background: linear-gradient(135deg, #111a11, #0d150d);
-      border-bottom: 1px solid var(--border-card);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-shrink: 0;
-    }
-    .chat-avatar {
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      background: var(--gold-gradient);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      color: var(--bg-primary);
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-    .chat-header-info h4 {
-      font-size: 15px;
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-    .chat-header-info span {
-      font-size: 12px;
-      color: var(--accent-green);
-    }
-    .chat-header-info .dot {
-      display: inline-block;
-      width: 6px; height: 6px;
-      background: var(--accent-green);
-      border-radius: 50%;
-      margin-right: 4px;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-
-    /* ── Chat Messages ── */
-    .chat-messages {
-      flex: 1;
-      overflow-y: auto;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .chat-messages::-webkit-scrollbar { width: 4px; }
-    .chat-messages::-webkit-scrollbar-thumb { background: var(--accent-green-dim); border-radius: 2px; }
-    .chat-messages::-webkit-scrollbar-track { background: transparent; }
-
-    .msg {
-      max-width: 85%;
-      padding: 12px 16px;
-      border-radius: var(--radius-md);
-      font-size: 14px;
-      line-height: 1.6;
-      animation: msgIn 0.3s ease;
-    }
-    @keyframes msgIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .msg.ai {
-      align-self: flex-start;
-      background: linear-gradient(135deg, #111a11, #0d150d);
-      border: 1px solid var(--border-card);
-      color: var(--text-secondary);
-      border-bottom-left-radius: 4px;
-    }
-    .msg.user {
-      align-self: flex-end;
-      background: linear-gradient(135deg, #1a2a1a, #152015);
-      border: 1px solid rgba(109, 163, 109, 0.2);
-      color: var(--text-primary);
-      border-bottom-right-radius: 4px;
-    }
-    .msg .time {
-      font-size: 10px;
-      color: var(--text-dim);
-      margin-top: 4px;
-      display: block;
-    }
-
-    /* ── Typing indicator ── */
-    .typing-indicator {
-      align-self: flex-start;
-      display: none;
-      padding: 12px 16px;
-      background: linear-gradient(135deg, #111a11, #0d150d);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius-md);
-      border-bottom-left-radius: 4px;
-      gap: 4px;
-    }
-    .typing-indicator.show { display: flex; }
-    .typing-indicator span {
-      width: 7px; height: 7px;
-      background: var(--text-dim);
-      border-radius: 50%;
-      animation: typing 1.4s infinite;
-    }
-    .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
-    .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes typing {
-      0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
-      30% { opacity: 1; transform: translateY(-4px); }
-    }
-
-    /* ── Chat Input ── */
-    .chat-input-area {
-      padding: 12px 16px;
-      border-top: 1px solid var(--border-card);
-      display: flex;
-      gap: 8px;
-      flex-shrink: 0;
-      background: #0d150d;
-    }
-    .chat-input-area input {
-      flex: 1;
-      background: #111a11;
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius-sm);
-      padding: 10px 14px;
-      font-size: 14px;
-      color: var(--text-primary);
-      outline: none;
-      transition: var(--transition);
-      font-family: 'Inter', sans-serif;
-    }
-    .chat-input-area input:focus {
-      border-color: var(--accent-green-dim);
-    }
-    .chat-input-area input::placeholder { color: var(--text-dim); }
-    .chat-send-btn {
-      width: 40px; height: 40px;
-      border-radius: var(--radius-sm);
-      background: var(--gold-gradient);
-      border: none;
-      color: var(--bg-primary);
-      font-size: 18px;
-      cursor: pointer;
-      transition: var(--transition);
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .chat-send-btn:hover { opacity: 0.9; }
-
-    /* ═══ WHAT HAPPENS NEXT ═══ */
-    .next-steps {
-      background: var(--bg-primary);
-    }
-    .steps-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      margin-top: 48px;
-    }
-    .step-item {
-      text-align: center;
-      padding: 36px 20px;
-    }
-    .step-item .step-num-lg {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 52px;
-      font-weight: 700;
-      color: rgba(212, 175, 55, 0.08);
-      line-height: 1;
-      margin-bottom: 16px;
-    }
-    .step-item h3 {
-      font-size: 18px;
-      margin-bottom: 8px;
-    }
-    .step-item p {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.7;
-    }
-    .step-arrow {
-      display: none;
-    }
-
-    /* ═══ RESPONSIVE ═══ */
-    @media (max-width: 768px) {
-      .contact-grid { grid-template-columns: 1fr; gap: 16px; }
-      .steps-row { grid-template-columns: 1fr; gap: 16px; }
-      .chat-panel {
-        width: calc(100vw - 24px);
-        height: 60vh;
-        bottom: 88px;
-        right: 12px;
-      }
-    }
-
-    /* ═══ CHAT WELCOME MESSAGE (initial) ═══ */
-    .welcome-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 8px;
-    }
-    .welcome-btn {
-      padding: 8px 14px;
-      background: rgba(109, 163, 109, 0.1);
-      border: 1px solid rgba(109, 163, 109, 0.2);
-      border-radius: 100px;
-      color: var(--text-secondary);
-      font-size: 12px;
-      cursor: pointer;
-      transition: var(--transition);
-      font-family: 'Inter', sans-serif;
-    }
-    .welcome-btn:hover {
-      background: rgba(109, 163, 109, 0.2);
-      color: var(--text-primary);
-      border-color: rgba(109, 163, 109, 0.3);
-    }
+    .contact-card:hover .icon-wrap { background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(109, 163, 109, 0.1)); border-color: rgba(212, 175, 55, 0.3); transform: scale(1.05); }
+    .contact-card h3 { font-size: 20px; margin-bottom: 8px; }
+    .contact-link { display: block; font-size: 18px; color: var(--gold); text-decoration: none; font-weight: 500; margin-bottom: 10px; transition: var(--transition); }
+    .contact-link:hover { color: #e8c040; }
+    .contact-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+    .next-steps { background: var(--bg-primary); }
+    .steps-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 48px; }
+    .step-item { text-align: center; padding: 36px 20px; }
+    .step-item .step-num-lg { font-family: 'Playfair Display', Georgia, serif; font-size: 52px; font-weight: 700; color: rgba(212, 175, 55, 0.08); line-height: 1; margin-bottom: 16px; }
+    .step-item h3 { font-size: 18px; margin-bottom: 8px; }
+    .step-item p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+    @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; gap: 16px; } .steps-row { grid-template-columns: 1fr; gap: 16px; } }
   </style>
 </head>
 <body>
-  <!-- ═══ Navigation ═══ -->
   <nav class="nav">
     <a href="index.html" class="nav-logo">
       Young Grasshopper
@@ -356,14 +48,12 @@
     </div>
   </nav>
 
-  <!-- ═══ Page Hero ═══ -->
   <section class="page-hero">
     <div class="hero-bg-icon">🦗</div>
     <h1>Let's Begin Your <span class="gold">Journey</span></h1>
     <p>Every great AI Employee starts with a conversation. Tell us about your business and we'll build something extraordinary together.</p>
   </section>
 
-  <!-- ═══ Contact Methods ═══ -->
   <section class="contact-methods">
     <div class="section-label" style="text-align:center;">Reach Out</div>
     <h2 class="section-title" style="text-align:center;">How to <span class="gold">Connect</span></h2>
@@ -381,201 +71,45 @@
         <p>Speak with us directly. We'll learn about your workflow and discuss how an AI Employee can help.</p>
       </div>
       <div class="contact-card card">
-        <div class="icon-wrap">💬</div>
-        <h3>Chat With Us</h3>
-        <span class="contact-link" style="color:var(--gold); cursor:pointer;" onclick="toggleChat()">Click to open chat</span>
-        <p>Get instant answers from our AI about what we do, how it works, and if it's right for you.</p>
+        <div class="icon-wrap">✉</div>
+        <h3>Send Us a Message</h3>
+        <p style="font-size:14px;color:var(--text-muted);line-height:1.7;">
+          Tell us about your business and what you need. We'll get back to you — usually within the same day.<br><br>
+          <strong style="color:var(--gold);">Email:</strong> <a href="mailto:hello@younggrasshopper.io" style="color:var(--gold);text-decoration:none;">hello@younggrasshopper.io</a><br>
+          <strong style="color:var(--gold);">Phone:</strong> <a href="tel:+13194034120" style="color:var(--gold);text-decoration:none;">+1 (319) 403-4120</a>
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- ═══ What Happens Next ═══ -->
   <section class="next-steps">
     <div class="section-label" style="text-align:center;">Your Path</div>
     <h2 class="section-title" style="text-align:center;">What Happens <span class="gold">Next</span></h2>
     <div class="steps-row">
-      <div class="step-item card">
-        <div class="step-num-lg">01</div>
-        <h3>You Reach Out</h3>
-        <p>Email, call, or chat with us. Tell us about your business and what you need help with.</p>
-      </div>
-      <div class="step-item card">
-        <div class="step-num-lg">02</div>
-        <h3>We Learn Your Work</h3>
-        <p>We study your workflows, your tools, your pain points. Every business is unique — your AI Employee will be too.</p>
-      </div>
-      <div class="step-item card">
-        <div class="step-num-lg">03</div>
-        <h3>We Build Your Employee</h3>
-        <p>We forge your AI Employee, train it on your data, and refine until it operates at master level.</p>
-      </div>
-      <div class="step-item card">
-        <div class="step-num-lg">04</div>
-        <h3>You Work Together</h3>
-        <p>Your AI Employee handles the volume. Your team handles what matters most. Together, you elevate.</p>
-      </div>
+      <div class="step-item card"><div class="step-num-lg">01</div><h3>You Reach Out</h3><p>Email or call us. Tell us about your business and what you need help with.</p></div>
+      <div class="step-item card"><div class="step-num-lg">02</div><h3>We Learn Your Work</h3><p>We study your workflows, your tools, your pain points. Every business is unique — your AI Employee will be too.</p></div>
+      <div class="step-item card"><div class="step-num-lg">03</div><h3>We Build Your Employee</h3><p>We forge your AI Employee, train it on your data, and refine until it operates at master level.</p></div>
+      <div class="step-item card"><div class="step-num-lg">04</div><h3>You Work Together</h3><p>Your AI Employee handles the volume. Your team handles what matters most. Together, you elevate.</p></div>
     </div>
   </section>
 
-  <!-- ═══ CTA ═══ -->
   <section class="cta-section">
     <h2>Not Sure Where to <br><span class="gold">Start?</span></h2>
     <p>That's exactly why we start with a conversation. Tell us what you do, and we'll show you what's possible.</p>
     <a href="mailto:hello@younggrasshopper.io" class="btn-primary">Send Us a Message</a>
   </section>
 
-  <!-- ═══ Footer ═══ -->
   <footer>
     <p>YOUNG GRASSHOPPER LLC · Danville, Iowa</p>
     <p><a href="mailto:hello@younggrasshopper.io">hello@younggrasshopper.io</a> · <a href="tel:+13194034120">+1 (319) 403-4120</a></p>
   </footer>
 
-  <!-- ═══ Chat Toggle Button ═══ -->
-  <button class="chat-toggle" id="chatToggle" onclick="toggleChat()">
-    <span class="chat-icon">💬</span>
-    <span class="close-icon">✕</span>
-  </button>
-
-  <!-- ═══ Chat Panel ═══ -->
-  <div class="chat-panel" id="chatPanel">
-    <div class="chat-header">
-      <div class="chat-avatar">YG</div>
-      <div class="chat-header-info">
-        <h4>Young Grasshopper AI</h4>
-        <span><span class="dot"></span>Online — Ask me anything</span>
-      </div>
-    </div>
-    <div class="chat-messages" id="chatMessages">
-      <div class="msg ai">
-        👋 Welcome to Young Grasshopper! I'm here to help you understand what an AI Employee can do for you.
-        <div class="welcome-buttons">
-          <button class="welcome-btn" onclick="quickQuestion('What does an AI Employee do?')">What does an AI Employee do?</button>
-          <button class="welcome-btn" onclick="quickQuestion('How much does it cost?')">How much does it cost?</button>
-          <button class="welcome-btn" onclick="quickQuestion('Can it work for my type of business?')">Can it work for my business?</button>
-          <button class="welcome-btn" onclick="quickQuestion('How do I get started?')">How do I get started?</button>
-        </div>
-        <span class="time">Just now</span>
-      </div>
-    </div>
-    <div class="typing-indicator" id="typingIndicator">
-      <span></span><span></span><span></span>
-    </div>
-    <div class="chat-input-area">
-      <input type="text" id="chatInput" placeholder="Ask about AI Employees..." onkeydown="if(event.key==='Enter')sendMessage()">
-      <button class="chat-send-btn" onclick="sendMessage()">➤</button>
-    </div>
-  </div>
-
   <script>
-    // ═══ Chat Widget ═══
-    let chatOpen = false;
-
-    function toggleChat() {
-      chatOpen = !chatOpen;
-      document.getElementById('chatPanel').classList.toggle('open', chatOpen);
-      document.getElementById('chatToggle').classList.toggle('active', chatOpen);
-      if (chatOpen) {
-        setTimeout(() => {
-          document.getElementById('chatInput').focus();
-        }, 300);
-      }
-    }
-
-    function quickQuestion(q) {
-      document.getElementById('chatInput').value = q;
-      sendMessage();
-    }
-
-    // ═══ Chat Backend URL ═══
-    // CHANGE THIS to your actual VPS URL when deploying
-    const CHAT_API_URL = 'https://app.younggrasshopper.io/api/website-chat';
-    // For local testing: http://46.225.171.88:5003/api/website-chat
-    const CHAT_SESSION = 'web-' + Math.random().toString(36).slice(2, 8);
-
-    function sendMessage() {
-      const input = document.getElementById('chatInput');
-      const msg = input.value.trim();
-      if (!msg) return;
-
-      addMessage(msg, 'user');
-      input.value = '';
-
-      document.getElementById('typingIndicator').classList.add('show');
-
-      // Call the real backend
-      const url = CHAT_API_URL + '?q=' + encodeURIComponent(msg) + '&session=' + CHAT_SESSION;
-      
-      fetch(url)
-        .then(res => res.json())
-        .then(data => {
-          document.getElementById('typingIndicator').classList.remove('show');
-          addMessage(data.response || 'Got it! Let me connect you with our team. Send us an email at hello@younggrasshopper.io for more details.', 'ai');
-        })
-        .catch(() => {
-          document.getElementById('typingIndicator').classList.remove('show');
-          // Fallback if backend is unreachable
-          const response = getAIResponse(msg);
-          addMessage(response, 'ai');
-        });
-    }
-
-    function addMessage(text, sender) {
-      const container = document.getElementById('chatMessages');
-      const msg = document.createElement('div');
-      msg.className = `msg ${sender}`;
-      
-      // Handle newlines in response
-      msg.innerHTML = text.replace(/\n/g, '<br>');
-      
-      const time = document.createElement('span');
-      time.className = 'time';
-      time.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      msg.appendChild(time);
-      
-      container.appendChild(msg);
-      container.scrollTop = container.scrollHeight;
-    }
-
-    function getAIResponse(msg) {
-      const lower = msg.toLowerCase();
-      
-      if (lower.includes('cost') || lower.includes('price') || lower.includes('pricing') || lower.includes('much')) {
-        return "Great question! Our AI Employees are custom-built for each business, so pricing depends on what you need. We'll discuss your requirements and build a plan that makes sense for your budget. The key is that an AI Employee costs a fraction of a human employee and works 24/7. Want to chat more about what you need?";
-      }
-      
-      if (lower.includes('farmer') || lower.includes('farm') || lower.includes('agriculture') || lower.includes('grain') || lower.includes('crop')) {
-        return "Absolutely! We have a dedicated AI Employee for farmers. It tracks grain prices in real-time, monitors weather and field conditions, manages equipment maintenance, handles paperwork and USDA filings, and much more. Farmers tell us it saves them hours every day. I'd recommend checking out our <a href='for-farmers.html' style='color:#d4af37;'>For Farmers page</a> for all the details!";
-      }
-
-      if (lower.includes('what does') || lower.includes('can it do') || lower.includes('capabilities')) {
-        return "An AI Employee is like having a dedicated team member who never sleeps. It can:\n\n• Answer calls and texts 24/7\n• Track market prices and trends\n• Monitor weather and send alerts\n• Manage schedules and appointments\n• Handle paperwork and reports\n• Research and summarize information\n• Learn new skills on demand\n\nAnd it's trained specifically for YOUR business. Check out our <a href='capabilities.html' style='color:#d4af37;'>full capabilities page</a> for the complete list!";
-      }
-
-      if (lower.includes('start') || lower.includes('begin') || lower.includes('get started') || lower.includes('how') && lower.includes('work')) {
-        return "Getting started is simple:\n\n1️⃣ Reach out to us — email, call, or chat right here\n2️⃣ We learn about your business and what you need\n3️⃣ We build your custom AI Employee\n4️⃣ You work together, and we keep improving it\n\nThe best first step is a conversation. What kind of business do you have?";
-      }
-
-      if (lower.includes('dental') || lower.includes('doctor') || lower.includes('medical') || lower.includes('health')) {
-        return "Yes! We've built AI Employees for healthcare practices. They handle patient reception, appointment scheduling, insurance claims, billing follow-ups, patient outreach, and much more — all with the warmth of a real front desk. The AI learns your specific workflows and standards.";
-      }
-
-      if (lower.includes('construction') || lower.includes('contractor') || lower.includes('build')) {
-        return "Construction businesses love our AI Employees! They track project deadlines, manage equipment maintenance, handle supplier communications, process invoices, research building codes and regulations, and keep your job sites organized. It's like having a project manager who never takes a day off.";
-      }
-
-      if (lower.includes('personal') || lower.includes('individual') || lower.includes('myself') || lower.includes('my life')) {
-        return "Great for individuals too! Our personal AI Employees help organize your schedule, track tasks, manage your side hustle, research topics, draft emails, and keep your digital life in order. Check out our <a href='for-individuals.html' style='color:#d4af37;'>For Individuals page</a> for more!";
-      }
-
-      // Default responses
-      const responses = [
-        "That's a great question! Our AI Employees are trained specifically for each client's needs. They learn the tools, workflows, and standards of your business and operate autonomously. What industry are you in? I can tell you more about what we've built for similar businesses.",
-        "I'd love to help you figure that out! Our AI Employees can handle almost any digital task — from answering phones and tracking data to filing reports and researching competitors. The key is we build it custom for YOUR specific needs. What kind of work do you do?",
-        "Great question! The short answer is: if it can be done on a computer or phone, our AI Employee can learn to do it. They're custom-built for each business, trained on your specific workflows. What would you want your AI Employee to handle?",
-        "That's exactly the kind of question we love! Our AI Employees are incredibly versatile because they're trained specifically for your needs, not forced into a one-size-fits-all box. Tell me a bit about your business and I can give you specific examples."
-      ];
-      return responses[Math.floor(Math.random() * responses.length)];
-    }
+    document.querySelectorAll('.fade-up, .scroll-reveal').forEach(el => {
+      new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.1 }).observe(el);
+    });
   </script>
 </body>
 </html>
