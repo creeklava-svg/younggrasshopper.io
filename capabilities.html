@@ -108,38 +108,7 @@
       flex-shrink: 0;
     }
 
-    /* ── Stats bar ── */
-    .stats-bar {
-      background: linear-gradient(180deg, var(--bg-primary), #0d1a0d);
-      padding: 80px 48px;
-      text-align: center;
-    }
-    .stats-bar-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
-    }
-    .stat-item {
-      padding: 24px;
-    }
-    .stat-item .stat-num {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 42px;
-      font-weight: 700;
-      color: var(--gold);
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-    .stat-item .stat-label {
-      font-size: 12px;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    /* ── Responsive ── */
+    /* ═══ RESPONSIVE ═══ */
     @media (max-width: 1024px) {
       .capabilities-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -184,6 +153,7 @@
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="for-farmers.html">For Farmers</a>
+      <a href="for-business.html">For Business</a>
       <a href="for-individuals.html">For Individuals</a>
       <a href="capabilities.html" class="active">Capabilities</a>
       <a href="contact.html" class="btn-nav">Get Started</a>
@@ -204,7 +174,7 @@
   <!-- ═══ Categories Intro ═══ -->
   <div class="categories-intro">
     <div class="section-label">The Full Arsenal</div>
-    <h2 class="section-title">30 Capabilities, <span class="gold">One Employee</span></h2>
+    <h2 class="section-title">Capabilities That <span class="gold">Grow With You</span></h2>
     <p class="section-text" style="margin:0 auto;">
       From answering phones to generating financial summaries, each AI Employee is trained 
       across five domains of expertise — and can learn anything new on demand.
@@ -293,28 +263,6 @@
 
     </div>
   </section>
-
-  <!-- ═══ Stats Bar ═══ -->
-  <div class="stats-bar">
-    <div class="stats-bar-inner">
-      <div class="stat-item">
-        <div class="stat-num">30</div>
-        <div class="stat-label">Built-in Capabilities</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">5</div>
-        <div class="stat-label">Expertise Domains</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">24/7</div>
-        <div class="stat-label">Always On Duty</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">∞</div>
-        <div class="stat-label">Expandable Skills</div>
-      </div>
-    </div>
-  </div>
 
   <!-- ═══ CTA ═══ -->
   <section class="cta-section">
