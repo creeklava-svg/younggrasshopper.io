@@ -9,36 +9,48 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <style>
-    .business-hero { background: linear-gradient(180deg, #0d1a0d, var(--bg-primary)); }
-    .biz-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-top: 48px;
+    .biz-promise { background: linear-gradient(180deg, #0d1a0d, var(--bg-primary)); }
+    .biz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .biz-benefits { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .biz-benefit {
+      background: linear-gradient(145deg, #111a11, #0d150d);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 20px; text-align: center; transition: var(--transition);
     }
-    .biz-card { text-align: center; padding: 40px 28px; }
-    .biz-card .biz-icon { font-size: 36px; margin-bottom: 16px; }
-    .biz-card h3 { font-size: 18px; margin-bottom: 10px; }
-    .biz-card p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
-    .biz-steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      margin-top: 48px;
+    .biz-benefit:hover { border-color: rgba(212, 175, 55, 0.2); transform: translateY(-2px); }
+    .biz-benefit .icon { font-size: 28px; margin-bottom: 8px; }
+    .biz-benefit h4 { font-size: 15px; margin-bottom: 4px; }
+    .biz-benefit p { font-size: 12px; color: var(--text-dim); }
+
+    .biz-savings { background: var(--bg-secondary); }
+    .savings-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 48px; }
+    .savings-card { text-align: center; padding: 36px 20px; }
+    .savings-card .si { font-size: 32px; margin-bottom: 12px; }
+    .savings-card h3 { font-size: 18px; margin-bottom: 8px; }
+    .savings-card p { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+
+    .biz-caps { background: #0d0f0d; }
+    .caps-wide { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 48px; }
+    .cap-item {
+      display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+      border-radius: var(--radius-sm); transition: var(--transition);
+      font-size: 14px; color: var(--text-secondary);
     }
+    .cap-item:hover { background: rgba(109, 163, 109, 0.05); color: var(--text-primary); }
+    .cap-item .dot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+
+    .biz-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 48px; }
     .biz-step { text-align: center; padding: 36px 24px; }
-    .biz-step .sn {
-      font-family: 'Playfair Display', serif;
-      font-size: 48px;
-      font-weight: 700;
-      color: rgba(212, 175, 55, 0.1);
-      line-height: 1;
-      margin-bottom: 16px;
-    }
+    .biz-step .sn { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: rgba(212, 175, 55, 0.1); line-height: 1; margin-bottom: 16px; }
     .biz-step h3 { font-size: 18px; margin-bottom: 10px; }
     .biz-step p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
     @media (max-width: 768px) {
-      .biz-grid, .biz-steps { grid-template-columns: 1fr; }
+      .biz-grid { grid-template-columns: 1fr; gap: 40px; }
+      .biz-benefits { grid-template-columns: 1fr; }
+      .savings-grid, .biz-steps { grid-template-columns: 1fr; }
+      .caps-wide { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -57,51 +69,104 @@
       <a href="contact.html" class="btn-nav">Get Started</a>
     </div>
   </nav>
-  <section class="page-hero business-hero">
+
+  <section class="page-hero" style="background: linear-gradient(180deg, #0d1a0d, var(--bg-primary));">
     <div class="hero-bg-icon">🏢</div>
     <h1>Your Business, <span class="gold">Amplified</span></h1>
-    <p>An AI Employee trained for your workflows, your customers, your industry. From dental practices to construction companies — one employee, unlimited potential.</p>
+    <p>Whatever you do — retail, construction, healthcare, consulting, logistics, creative, service — your AI Employee learns your business and works alongside your team.</p>
   </section>
-  <section>
-    <div class="section-label" style="text-align:center;">What We Build</div>
-    <h2 class="section-title" style="text-align:center;">An AI Employee for <span class="gold">Every Business</span></h2>
-    <p class="section-text" style="margin:0 auto 48px; text-align:center; max-width:650px;">
-      Your AI Employee learns your specific business — your software, your documents, your customers, your way of doing things. It handles the busywork so your team can focus on what matters.
-    </p>
+
+  <section class="biz-promise">
     <div class="biz-grid">
-      <div class="biz-card card">
-        <div class="biz-icon">🦷</div>
-        <h3>Healthcare & Dental</h3>
-        <p>Patient reception, appointment scheduling, insurance claims, billing follow-ups, patient outreach — all with the warmth of a real front desk.</p>
+      <div>
+        <div class="section-label">The Big Promise</div>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 36px; line-height: 1.3; margin-bottom: 20px;">What if you had an employee who costs a fraction of a salary, works 24/7, and gets better every single day?</h2>
+        <p class="section-text">
+          Your AI Employee handles the work your team doesn't have time for — answering inquiries, tracking data, processing paperwork, monitoring markets, managing schedules. It learns your specific business: your customers, your products, your way of doing things. And it costs less than you'd think.
+        </p>
       </div>
-      <div class="biz-card card">
-        <div class="biz-icon">🏗️</div>
-        <h3>Construction</h3>
-        <p>Project deadlines, equipment management, supplier communications, invoice processing, code research — a project manager that never sleeps.</p>
-      </div>
-      <div class="biz-card card">
-        <div class="biz-icon">🏭</div>
-        <h3>Manufacturing</h3>
-        <p>Inventory tracking, supply chain monitoring, maintenance scheduling, compliance reporting, shift management — precision at every step.</p>
-      </div>
-      <div class="biz-card card">
-        <div class="biz-icon">📊</div>
-        <h3>Office & Professional</h3>
-        <p>Calendar management, client communications, document processing, research, reporting — the executive assistant you've always needed.</p>
-      </div>
-      <div class="biz-card card">
-        <div class="biz-icon">🛒</div>
-        <h3>Retail & E-commerce</h3>
-        <p>Customer service, order tracking, inventory management, return processing, marketing outreach — your store runs 24/7.</p>
-      </div>
-      <div class="biz-card card">
-        <div class="biz-icon">🎨</div>
-        <h3>Creative & Media</h3>
-        <p>Content scheduling, client communication, project tracking, research, asset management — more time to create, less time on admin.</p>
+      <div class="biz-benefits">
+        <div class="biz-benefit">
+          <div class="icon">💬</div>
+          <h4>Customer Communication</h4>
+          <p>Answer calls, texts, and emails 24/7. Never miss a lead.</p>
+        </div>
+        <div class="biz-benefit">
+          <div class="icon">📊</div>
+          <h4>Data & Reporting</h4>
+          <p>Track metrics, generate reports, monitor trends automatically.</p>
+        </div>
+        <div class="biz-benefit">
+          <div class="icon">📋</div>
+          <h4>Paperwork & Compliance</h4>
+          <p>Fill forms, file reports, track deadlines. Hours back in your day.</p>
+        </div>
+        <div class="biz-benefit">
+          <div class="icon">🧠</div>
+          <h4>Always Learning</h4>
+          <p>Your AI gets smarter every day. Trained on your specific business.</p>
+        </div>
       </div>
     </div>
   </section>
-  <section style="background:var(--bg-secondary);">
+
+  <section class="biz-savings">
+    <div class="section-label" style="text-align:center;">Time & Money</div>
+    <h2 class="section-title" style="text-align:center;">What You <span class="gold">Gain</span></h2>
+    <div class="savings-grid">
+      <div class="savings-card card">
+        <div class="si">⏰</div>
+        <h3>Hours Back Every Day</h3>
+        <p>Stop chasing emails, filing paperwork, and answering the same questions. Your AI handles it so your team focuses on what only people can do.</p>
+      </div>
+      <div class="savings-card card">
+        <div class="si">💰</div>
+        <h3>Lower Operating Costs</h3>
+        <p>An AI Employee costs a fraction of a full-time hire. No benefits, no time off, no turnover. Just consistent, reliable work.</p>
+      </div>
+      <div class="savings-card card">
+        <div class="si">⚡</div>
+        <h3>Faster Response Times</h3>
+        <p>Customers get answers instantly, orders get processed immediately, issues get flagged the moment they arise. Your business moves faster.</p>
+      </div>
+      <div class="savings-card card">
+        <div class="si">📈</div>
+        <h3>Consistent Quality</h3>
+        <p>No bad days, no missed details, no dropped balls. Your AI follows your processes perfectly, every single time.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="biz-caps">
+    <div class="section-label" style="text-align:center;">Built for Your Business</div>
+    <h2 class="section-title" style="text-align:center;">What Your AI Employee <br><span class="gold">Can Do For You</span></h2>
+    <div class="caps-wide">
+      <div class="cap-item"><span class="dot"></span> Answer customer calls and texts 24/7</div>
+      <div class="cap-item"><span class="dot"></span> Schedule appointments and send reminders</div>
+      <div class="cap-item"><span class="dot"></span> Process orders and track shipments</div>
+      <div class="cap-item"><span class="dot"></span> Manage invoices and payment follow-ups</div>
+      <div class="cap-item"><span class="dot"></span> Monitor market prices and industry trends</div>
+      <div class="cap-item"><span class="dot"></span> Track inventory and reorder supplies</div>
+      <div class="cap-item"><span class="dot"></span> Generate daily briefing reports</div>
+      <div class="cap-item"><span class="dot"></span> Research competitors and market intelligence</div>
+      <div class="cap-item"><span class="dot"></span> Handle returns, exchanges, and complaints</div>
+      <div class="cap-item"><span class="dot"></span> Fill forms, file reports, handle paperwork</div>
+      <div class="cap-item"><span class="dot"></span> Track deadlines and send proactive alerts</div>
+      <div class="cap-item"><span class="dot"></span> Manage employee schedules and time tracking</div>
+      <div class="cap-item"><span class="dot"></span> Monitor regulatory changes in your industry</div>
+      <div class="cap-item"><span class="dot"></span> Manage social media and customer outreach</div>
+      <div class="cap-item"><span class="dot"></span> Track sales leads and follow up automatically</div>
+      <div class="cap-item"><span class="dot"></span> Generate expense reports and financial summaries</div>
+      <div class="cap-item"><span class="dot"></span> Organize digital files and records</div>
+      <div class="cap-item"><span class="dot"></span> Create custom reports and dashboards</div>
+      <div class="cap-item"><span class="dot"></span> Integrate with your existing software and tools</div>
+      <div class="cap-item"><span class="dot"></span> Learn new skills and workflows on demand</div>
+      <div class="cap-item"><span class="dot"></span> Manage email marketing and campaigns</div>
+      <div class="cap-item"><span class="dot"></span> Monitor online reviews and brand mentions</div>
+    </div>
+  </section>
+
+  <section style="background: var(--bg-primary);">
     <div class="section-label" style="text-align:center;">How It Works</div>
     <h2 class="section-title" style="text-align:center;">From Day One to <span class="gold">Full Speed</span></h2>
     <div class="biz-steps">
@@ -127,14 +192,24 @@
       </div>
     </div>
   </section>
+
   <section class="cta-section">
     <h2>Ready to Amplify<br>Your <span class="gold">Business?</span></h2>
     <p>Every great AI Employee started with a conversation. Let's talk about what your business needs.</p>
     <a href="contact.html" class="btn-primary">Start Your Journey</a>
   </section>
+
   <footer>
     <p>YOUNG GRASSHOPPER LLC · Danville, Iowa</p>
     <p><a href="mailto:hello@younggrasshopper.io">hello@younggrasshopper.io</a> · <a href="contact.html">Contact Us</a></p>
   </footer>
+
+  <script>
+    document.querySelectorAll('.fade-up, .scroll-reveal').forEach(el => {
+      new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.1 }).observe(el);
+    });
+  </script>
 </body>
 </html>
