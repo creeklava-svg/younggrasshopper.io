@@ -121,10 +121,9 @@
       overflow: hidden;
     }
     .slideshow-track {
-      display: flex;
+      display: inline-flex;
       gap: 0;
-      animation: scrollSlides 45s linear infinite;
-      width: fit-content;
+      animation: scrollSlides 60s linear infinite;
     }
     .slideshow-track:hover { animation-play-state: paused; }
     @keyframes scrollSlides {
@@ -187,44 +186,34 @@
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-    .about-circle {
-      width: 300px; height: 300px;
-      border: 1px solid rgba(93, 137, 93, 0.12);
-      border-radius: 50%;
-      position: relative;
-      animation: spin 30s linear infinite;
-    }
-    .about-circle .dot {
-      position: absolute;
-      width: 8px; height: 8px;
-      background: var(--gold);
-      border-radius: 50%;
-    }
-    .about-circle .dot:nth-child(1) { top: 50%; left: -4px; }
-    .about-circle .dot:nth-child(2) { top: 50%; right: -4px; }
-    .about-circle .dot:nth-child(3) { top: -4px; left: 50%; }
-    .about-circle .dot:nth-child(4) { bottom: -4px; left: 50%; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    .about-symbols {
-      display: flex;
+      flex-direction: column;
       gap: 20px;
-      margin-top: 40px;
-      justify-content: center;
     }
-    .about-symbol {
-      width: 80px; height: 80px;
-      border: 1px solid rgba(93, 137, 93, 0.1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      animation: float 6s ease-in-out infinite;
+    .about-stat {
+      text-align: center;
+      background: linear-gradient(145deg, #111a11, #0d150d);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 28px 24px;
+      width: 100%;
+      max-width: 280px;
+      transition: var(--transition);
     }
-    .about-symbol:nth-child(2) { animation-delay: -2s; }
-    .about-symbol:nth-child(3) { animation-delay: -4s; }
+    .about-stat:hover {
+      border-color: rgba(212, 175, 55, 0.2);
+      transform: translateY(-2px);
+    }
+    .about-stat .stat-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .about-stat .stat-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
 
     /* ═══ CAPABILITIES TEASER ═══ */
     .capabilities-teaser {
@@ -413,6 +402,7 @@
     <div class="nav-links">
       <a href="index.html" class="active">Home</a>
       <a href="for-farmers.html">For Farmers</a>
+      <a href="for-business.html">For Business</a>
       <a href="for-individuals.html">For Individuals</a>
       <a href="capabilities.html">Capabilities</a>
       <a href="contact.html" class="btn-nav">Get Started</a>
@@ -582,32 +572,32 @@
   <section class="about-section">
     <div class="about-grid">
       <div class="about-visual">
-        <div class="about-circle">
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
+        <div class="about-stat">
+          <div class="stat-num">10+</div>
+          <div class="stat-label">Hours saved per week per employee</div>
+        </div>
+        <div class="about-stat">
+          <div class="stat-num">24/7</div>
+          <div class="stat-label">Always on duty — never sleeps, never takes a day off</div>
+        </div>
+        <div class="about-stat">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Focused on your business — trained for your specific workflows</div>
         </div>
       </div>
       <div>
         <div class="section-label">The Way of the Grasshopper</div>
         <h2 class="section-title">Technology in Service of <br>Human Potential</h2>
         <p class="section-text">
-          The young grasshopper learns by watching, by doing, by failing and rising again. 
-          So too does our AI — not as a cold tool, but as a <strong>disciplined practitioner</strong> 
-          of your business. We build AI that doesn't replace people, 
-          but <strong>elevates them</strong> to focus on what matters.
+          Your AI Employee works 24/7 monitoring markets, managing customers, tracking data, and handling paperwork. 
+          It doesn't replace your team — it <strong>amplifies them</strong>. Every hour your AI works is an hour 
+          your team gets back for what matters most.
         </p>
         <p class="section-text" style="margin-top:16px;">
           Every deployment is a <strong>partnership</strong>. We train your AI Employee 
           in the specifics of your work — your customers, your workflows, your standards — 
           until it operates with the precision of a master.
         </p>
-        <div class="about-symbols">
-          <div class="about-symbol">⚡</div>
-          <div class="about-symbol">🦗</div>
-          <div class="about-symbol">🧘</div>
-        </div>
       </div>
     </div>
   </section>
