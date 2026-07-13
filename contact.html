@@ -122,7 +122,18 @@
       </div>
       <button type="submit" class="btn-primary" style="display:block; margin:0 auto;">Send Message</button>
     </form>
-  </section>
+        <div id="formSent" style="display:none; text-align:center; padding:40px; margin-top:20px; background:linear-gradient(145deg, #111a11, #0d150d); border:1px solid var(--border-card); border-radius:var(--radius-md);">
+          <div style="font-size:48px; margin-bottom:16px;">✓</div>
+          <h3 style="font-size:22px; color:var(--gold); margin-bottom:8px;">Message Sent!</h3>
+          <p style="color:var(--text-muted); font-size:15px;">Thanks for reaching out. We'll get back to you within 24 hours.</p>
+        </div>
+        <script>
+          if (window.location.search.includes('sent=1')) {
+            document.querySelector('form').style.display = 'none';
+            document.getElementById('formSent').style.display = 'block';
+          }
+        </script>
+      </section>
 
   <section class="next-steps">
     <div class="section-label" style="text-align:center;">Your Path</div>
