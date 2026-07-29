@@ -126,10 +126,10 @@
         <p>Send us a message about your business and what you need. We'll respond within 24 hours.</p>
       </div>
       <div class="contact-card card">
-        <div class="icon-wrap">📞</div>
-        <h3>Call Us</h3>
-        <a href="tel:+13194034120" class="contact-link">+1 (319) 403-4120</a>
-        <p>Speak with us directly. We'll learn about your workflow and discuss how an AI Employee can help.</p>
+        <div class="icon-wrap">💬</div>
+        <h3>Live Chat</h3>
+        <p style="color:var(--gold); font-size:18px; font-weight:500; margin-bottom:10px;">Click the chat button below</p>
+        <p>Chat with our AI right now. Ask about AI Employees, pricing, or anything else. We respond instantly.</p>
       </div>
       <div class="contact-card card">
         <div class="icon-wrap">✉</div>
@@ -144,30 +144,27 @@
   <section class="contact-form">
     <div class="section-label" style="text-align:center;">Get in Touch</div>
     <h2 class="section-title" style="text-align:center;">Send Us a <span class="gold">Message</span></h2>
-    <form action="https://formsubmit.co/hello@younggrasshopper.io" method="POST">
-      <input type="hidden" name="_subject" value="New Young Grasshopper inquiry!">
-      <input type="hidden" name="_next" value="https://younggrasshopper.io/contact.html?sent=1">
-      <input type="hidden" name="_template" value="box">
-      <input type="text" name="_honey" style="display:none">
+    <form id="contactForm" onsubmit="return submitForm(event)">
       <div class="form-row">
         <div class="form-group">
           <label>Your Name</label>
-          <input type="text" name="name" placeholder="John Smith" required>
+          <input type="text" id="formName" placeholder="John Smith" required>
         </div>
         <div class="form-group">
           <label>Your Email</label>
-          <input type="email" name="email" placeholder="john@example.com" required>
+          <input type="email" id="formEmail" placeholder="john@example.com" required>
         </div>
       </div>
       <div class="form-group">
         <label>What kind of business do you have?</label>
-        <input type="text" name="business" placeholder="Farming, Construction, Retail, Personal use, etc.">
+        <input type="text" id="formBusiness" placeholder="Farming, Construction, Retail, Personal use, etc.">
       </div>
       <div class="form-group">
         <label>Your Message</label>
-        <textarea name="message" placeholder="Tell us about what you need help with..." required></textarea>
+        <textarea id="formMessage" placeholder="Tell us about what you need help with..." required></textarea>
       </div>
       <button type="submit" class="btn-primary" style="display:block; margin:0 auto;">Send Message</button>
+      <div id="formSending" style="display:none; text-align:center; padding:20px; color:var(--text-muted);">Sending your message...</div>
     </form>
         <div id="formSent" style="display:none; text-align:center; padding:40px; margin-top:20px; background:linear-gradient(145deg, #111a11, #0d150d); border:1px solid var(--border-card); border-radius:var(--radius-md);">
           <div style="font-size:48px; margin-bottom:16px;">✓</div>
@@ -179,6 +176,44 @@
             document.querySelector('form').style.display = 'none';
             document.getElementById('formSent').style.display = 'block';
           }
+
+        function submitForm(event) {
+          event.preventDefault();
+          const btn = document.querySelector("#contactForm button");
+          const sending = document.getElementById("formSending");
+          btn.style.display = "none";
+          sending.style.display = "block";
+
+          const data = {
+            name: document.getElementById("formName").value,
+            email: document.getElementById("formEmail").value,
+            business: document.getElementById("formBusiness").value,
+            message: document.getElementById("formMessage").value
+          };
+
+          fetch("https://app.younggrasshopper.io/api/contact-form", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(data)
+          })
+          .then(r => r.json())
+          .then(d => {
+            sending.style.display = "none";
+            if (d.status === "ok") {
+              document.getElementById("contactForm").style.display = "none";
+              document.getElementById("formSent").style.display = "block";
+            } else {
+              alert("Something went wrong. Please email us directly at hello@younggrasshopper.io");
+              btn.style.display = "block";
+            }
+          })
+          .catch(() => {
+            sending.style.display = "none";
+            alert("Connection issue. Please email us at hello@younggrasshopper.io");
+            btn.style.display = "block";
+          });
+          return false;
+        }
         </script>
       </section>
 
@@ -226,7 +261,7 @@
 
   <footer>
     <p>YOUNG GRASSHOPPER LLC · Danville, Iowa</p>
-    <p><a href="mailto:hello@younggrasshopper.io">hello@younggrasshopper.io</a> · <a href="tel:+13194034120">+1 (319) 403-4120</a></p>
+    <p><a href="mailto:hello@younggrasshopper.io">hello@younggrasshopper.io</a></p>
   </footer>
 
   <script>
