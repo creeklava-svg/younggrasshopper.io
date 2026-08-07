@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Young Grasshopper — Install Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0f0a;
+            color: #e0e8e0;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { font-size: 28px; color: #d4af37; margin-bottom: 6px; }
+        .sub { color: #8a9a8a; font-size: 14px; margin-bottom: 32px; }
+        h2 { font-size: 18px; color: #e8ede8; margin: 28px 0 12px; }
+        .os-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+        .os-tab {
+            padding: 8px 20px;
+            border: 1px solid #2d4a2d;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .os-tab.active { background: #d4af37; color: #0a0f0a; border-color: #d4af37; }
+        .os-tab:hover { border-color: #d4af37; }
+        .step {
+            background: #0d1a0d;
+            border: 1px solid #1a3a1a;
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+        }
+        .step-num {
+            font-size: 12px;
+            color: #d4af37;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .step-desc { font-size: 14px; margin-bottom: 10px; line-height: 1.5; }
+        .step .cmd {
+            background: #0a0f0a;
+            border: 1px solid #1a3a1a;
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: #b8d8b8;
+            overflow-x: auto;
+            user-select: all;
+            cursor: text;
+            position: relative;
+        }
+        .step .cmd:hover { border-color: #2d5a2d; }
+        .step .cmd::after {
+            content: '📋 Click to copy';
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            color: #5a7a5a;
+            pointer-events: none;
+        }
+        .label { color: #8a9a8a; font-size: 12px; margin-top: 6px; }
+        .os-content { display: none; }
+        .os-content.active { display: block; }
+        .check { color: #5d895d; font-size: 13px; margin-top: 4px; }
+        .warn {
+            background: rgba(212,175,55,0.08);
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 13px;
+            color: #c8b878;
+            margin-bottom: 16px;
+        }
+        @media print {
+            .os-tabs, .step .cmd::after { display: none; }
+            body { padding: 20px; }
+            .step { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <h1>🦗 Young Grasshopper — Install Guide</h1>
+    <p class="sub">Copy-paste these commands into the client's terminal. One step at a time.</p>
+
+    <div class="warn">⚠️ You'll need the client's sudo/admin password for steps marked with 🔑</div>
+
+    <div class="os-tabs">
+        <div class="os-tab active" onclick="showOS('linux')">🐧 Linux / Ubuntu</div>
+        <div class="os-tab" onclick="showOS('mac')">🍎 Mac</div>
+        <div class="os-tab" onclick="showOS('windows')">🪟 Windows</div>
+    </div>
+
+    <!-- ─── Linux ─── -->
+    <div class="os-content active" id="os-linux">
+        <h2>Prerequisites</h2>
+        <div class="step">
+            <div class="step-num">🔑 STEP 1 — Install System Packages</div>
+            <div class="step-desc">Runs once. Gets Python and dependencies ready.</div>
+            <div class="cmd" onclick="copyCmd(this)">sudo apt update && sudo apt install python3-pip python3-dotenv python3-croniter curl -y</div>
+        </div>
+        <div class="step">
+            <div class="step-num">STEP 2 — Install Hermes Agent</div>
+            <div class="step-desc">One-line install from Nous Research.</div>
+            <div class="cmd" onclick="copyCmd(this)">curl -fsSL https://hermes-agent.nousresearch.com/install | sh</div>
+        </div>
+        <div class="step">
+            <div class="step-num">STEP 3 — Verify Hermes Works</div>
+            <div class="step-desc">Check that Hermes is installed and ready.</div>
+            <div class="cmd" onclick="copyCmd(this)">export PATH=$PATH:$HOME/hermes-agent && hermes --version</div>
+            <div class="check">✅ Should show: Hermes Agent v0.17.0</div>
+        </div>
+        <h2>Young Grasshopper Portal</h2>
+        <div class="step">
+            <div class="step-num">STEP 4 — Set Up Portal</div>
+            <div class="step-desc">Creates virtual environment and installs dependencies.</div>
+            <div class="cmd" onclick="copyCmd(this)">mkdir -p ~/younggrasshopper-portal/templates && python3 -m venv ~/younggrasshopper-portal/venv && source ~/younggrasshopper-portal/venv/bin/activate && pip install flask flask-session twilio python-dotenv -q</div>
+        </div>
+        <div class="step">
+            <div class="step-num">STEP 5 — Set Up Health Check Cron Job</div>
+            <div class="step-desc">Daily check runs at 9am. Reports machine health.</div>
+            <div class="cmd" onclick="copyCmd(this)">export PATH=$PATH:$HOME/hermes-agent && hermes cron create '0 9 * * *' 'Check machine health: uptime, disk, memory, portal status.' --name 'Daily Health Check' --deliver origin</div>
+        </div>
+        <div class="step">
+            <div class="step-num">STEP 6 — Install Tailscale (for remote access)</div>
+            <div class="step-desc">Enables me to SSH in and help remotely.</div>
+            <div class="cmd" onclick="copyCmd(this)">curl -fsSL https://tailscale.com/install.sh | sh && sudo tailscale up</div>
+            <div class="label">After this, share the Tailscale invite link with Ryan.</div>
+        </div>
+    </div>
+
+    <!-- ─── Mac ─── -->
+    <div class="os-content" id="os-mac">
+        <h2>Prerequisites</h2>
+        <div class="step">
+            <div class="step-num">🔑 STEP 1 — Install Homebrew (if not installed)</div>
+            <div class="cmd" onclick="copyCmd(this)">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</div>
+        </div>
+        <div class="step">
+            <div class="step-num">STEP 2 — Install Python + Dependencies</div>
+            <div class="cmd" onclick="copyCmd(this)">brew install python && pip3 install flask flask-session twilio python-dotenv</div>
+        </div>
+        <div class="step">
+            <div class="step-num">STEP 3 — Install Hermes Agent</div>
+            <div class="cmd" onclick="copyCmd(this)">curl -fsSL https://hermes-agent.nousresearch.com/install | sh</div>
+        </div>
+        <div class="step">
+            <div class="step-num">STEP 4 — Install Tailscale</div>
+            <div class="cmd" onclick="copyCmd(this)">brew install --cask tailscale</div>
+            <div class="label">Open Tailscale from Applications and sign in.</div>
+        </div>
+    </div>
+
+    <!-- ─── Windows ─── -->
+    <div class="os-content" id="os-windows">
+        <div class="warn">⚠️ Windows 10+ required. Windows 8.1 is NOT supported — install Ubuntu instead.</div>
+        <h2>Prerequisites</h2>
+        <div class="step">
+            <div class="step-num">STEP 1 — Install Python</div>
+            <div class="step-desc">Go to python.org and download Python 3.11+. <strong>Check "Add to PATH" during install.</strong></div>
+            <div class="cmd" onclick="copyCmd(this)">https://www.python.org/downloads/</div>
+        </div>
+        <div class="step">
+            <div class="step-num">STEP 2 — Install Hermes Agent</div>
+            <div class="step-desc">Open Command Prompt (cmd) and run:</div>
+            <div class="cmd" onclick="copyCmd(this)">curl -fsSL https://hermes-agent.nousresearch.com/install | sh</div>
+        </div>
+        <div class="step">
+            <div class="step-num">STEP 3 — Install Tailscale</div>
+            <div class="step-desc">Go to tailscale.com/download and install. Sign in with your Google account.</div>
+            <div class="cmd" onclick="copyCmd(this)">https://tailscale.com/download/windows</div>
+        </div>
+    </div>
+
+    <script>
+        function showOS(os) {
+            document.querySelectorAll('.os-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.os-tab').forEach(el => el.classList.remove('active'));
+            document.getElementById('os-' + os).classList.add('active');
+            event.target.classList.add('active');
+        }
+        function copyCmd(el) {
+            navigator.clipboard.writeText(el.textContent.trim().split('📋')[0].trim()).catch(() => {});
+            el.style.borderColor = '#5d895d';
+            setTimeout(() => el.style.borderColor = '', 1000);
+        }
+    </script>
+</body>
+</html>
