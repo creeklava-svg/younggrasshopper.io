@@ -158,6 +158,11 @@
       <a href="capabilities.html" class="active">Capabilities</a>
       <a href="contact.html" class="btn-nav">Get Started</a>
     </div>
+      <button class="mobile-menu-btn" aria-label="Toggle menu" onclick="toggleMobileMenu(event)">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
   </nav>
 
   <!-- ═══ Page Hero ═══ -->
@@ -297,7 +302,17 @@
         if (target) target.scrollIntoView({ behavior: 'smooth' });
       });
     });
-  </script>
-
+  
+    // ── Mobile menu toggle ──
+    function toggleMobileMenu(ev) {
+      if (ev) ev.stopPropagation();
+      document.querySelector('.nav').classList.toggle('menu-open');
+    }
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.addEventListener('click', () => {
+        document.querySelector('.nav').classList.remove('menu-open');
+      });
+    });
+</script>
 </body>
 </html>
