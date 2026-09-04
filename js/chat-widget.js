@@ -98,7 +98,7 @@
   var host = document.createElement('div');
   host.innerHTML = `
     <button class="chat-toggle-btn" id="chatBtn" aria-label="Open chat">
-      <span class="chat-icon">💬</span>
+      <span class="chat-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
       <span class="close-icon">✕</span>
     </button>
     <div class="chat-panel" id="chatPanel">
@@ -110,7 +110,7 @@
         </div>
       </div>
       <div class="chat-msgs" id="chatMsgs">
-        <div class="msg ai">👋 Hey there! I'm the Young Grasshopper AI. Ask me anything about our AI Employees — what they can do, how they work, or if they'd be a good fit for your business.</div>
+        <div class="msg ai">Hey there! I'm the Young Grasshopper AI. Ask me anything about our AI Employees — what they can do, how they work, or if they'd be a good fit for your business.</div>
       </div>
       <div class="chat-quick" id="chatQuick">
         <button onclick="window.__YGCHAT__ && window.__YGCHAT__.quick('What does an AI Employee do?')">What does an AI Employee do?</button>

@@ -424,3 +424,18 @@ footer a:hover { color: var(--gold); }
   .cta-section { padding: 80px 20px; }
   .cta-section h2 { font-size: 32px; }
 }
+/* ═══ Custom SVG icon set (replaces emoji icons) ═══ */
+.ic {
+  display: inline-block; width: 1em; height: 1em;
+  fill: none; stroke: currentColor; stroke-width: 1.8;
+  stroke-linecap: round; stroke-linejoin: round;
+  vertical-align: -0.15em;
+}
+.promise-benefit .icon, .biz-benefit .icon,
+.savings-card .s-icon, .savings-card .si,
+.cap-card .cap-icon, .who-card .who-icon,
+.cap-card .cat-icon, .contact-card .icon-wrap { color: #d4af37; }
+
+/* Brand watermark in page heroes (replaces ghost emoji) */
+.page-hero .hero-bg-icon img { width: 300px; max-width: 72vw; height: auto; display: block; }
+.hero-emblem { width: 64px; height: auto; display: block; margin: 0 auto 6px; }

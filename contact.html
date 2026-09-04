@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" href="brand-mark.png" type="image/png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact — Young Grasshopper</title>
@@ -115,7 +116,7 @@
   </nav>
 
   <section class="page-hero">
-    <div class="hero-bg-icon">🦗</div>
+    <div class="hero-bg-icon" aria-hidden="true"><img src="brand-mark.png" alt="" aria-hidden="true"></div>
     <h1>Let's Begin Your <span class="gold">Journey</span></h1>
     <p>Every great AI Employee starts with a conversation. Tell us about your business and we'll build something extraordinary together.</p>
   </section>
@@ -125,19 +126,19 @@
     <h2 class="section-title" style="text-align:center;">How to <span class="gold">Connect</span></h2>
     <div class="contact-grid">
       <div class="contact-card card">
-        <div class="icon-wrap">✉</div>
+        <div class="icon-wrap"><svg class="ic" aria-hidden="true"><use href="icons.svg#mail"></use></svg></div>
         <h3>Email Us</h3>
         <a href="mailto:hello@younggrasshopper.io" class="contact-link">hello@younggrasshopper.io</a>
         <p>Send us a message about your business and what you need. We'll respond within 24 hours.</p>
       </div>
       <div class="contact-card card">
-        <div class="icon-wrap">💬</div>
+        <div class="icon-wrap"><svg class="ic" aria-hidden="true"><use href="icons.svg#chat"></use></svg></div>
         <h3>Live Chat</h3>
         <p style="color:var(--gold); font-size:18px; font-weight:500; margin-bottom:10px;">Click the chat button below</p>
         <p>Chat with our AI right now. Ask about AI Employees, pricing, or anything else. We respond instantly.</p>
       </div>
       <div class="contact-card card">
-        <div class="icon-wrap">✉</div>
+        <div class="icon-wrap"><svg class="ic" aria-hidden="true"><use href="icons.svg#mail"></use></svg></div>
         <h3>Send Us a Message</h3>
         <a href="mailto:hello@younggrasshopper.io" class="contact-link">hello@younggrasshopper.io</a>
         <p>Or use the contact form below. We'll get back to you within 24 hours.</p>
@@ -172,7 +173,7 @@
       <div id="formSending" style="display:none; text-align:center; padding:20px; color:var(--text-muted);">Sending your message...</div>
     </form>
         <div id="formSent" style="display:none; text-align:center; padding:40px; margin-top:20px; background:linear-gradient(145deg, #111a11, #0d150d); border:1px solid var(--border-card); border-radius:var(--radius-md);">
-          <div style="font-size:48px; margin-bottom:16px;">✓</div>
+          <div style="margin-bottom:16px;"><svg class="ic" style="width:48px;height:48px;color:var(--gold);" aria-hidden="true"><use href="icons.svg#check"></use></svg></div>
           <h3 style="font-size:22px; color:var(--gold); margin-bottom:8px;">Message Sent!</h3>
           <p style="color:var(--text-muted); font-size:15px;">Thanks for reaching out. We'll get back to you within 24 hours.</p>
         </div>
@@ -241,7 +242,7 @@
 
   <!-- ═══ Chat Widget Button ═══ -->
   <button class="chat-toggle-btn" id="chatBtn" onclick="toggleChat()">
-    <span class="chat-icon">💬</span>
+    <span class="chat-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
     <span class="close-icon">✕</span>
   </button>
 
@@ -255,7 +256,7 @@
       </div>
     </div>
     <div class="chat-msgs" id="chatMsgs">
-      <div class="msg ai">👋 Hey there! I'm the Young Grasshopper AI. Ask me anything about our AI Employees — what they can do, how they work, or if they'd be a good fit for your business.</div>
+      <div class="msg ai">Hey there! I'm the Young Grasshopper AI. Ask me anything about our AI Employees — what they can do, how they work, or if they'd be a good fit for your business.</div>
     </div>
     <div class="typing" id="typing"><span></span><span></span><span></span></div>
     <div class="chat-input-area">
